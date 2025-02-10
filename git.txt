@@ -3,4 +3,5 @@
 3. git remote -v (to verify that the repo is added back in locally)
 4. git add .
 5. git commit -m "your commit message"
-6. git push -u origin main
+6. git pull --rebase origin main
+7. git push -u origin main
