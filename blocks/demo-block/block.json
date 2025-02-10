@@ -1,0 +1,25 @@
+{
+    "name": "acf/demo-block",
+    "title": "Demo Block",
+    "description": "This is a demo block",
+    "category": "Complete Marketing",
+    "style": [
+        "file:./demo-block.css"
+    ],
+    "editorStyle": [
+        "file:./demo-block-editor.css"
+    ],
+    "script": "file:./demo-block.js",
+    "icon": "format-image",
+    "keywords": [
+        "demo"
+    ],
+    "acf": {
+        "mode": "edit",
+        "renderTemplate": "demo-block.php"
+    },
+    "supports": {
+        "anchor": "true"
+    },
+    "align": "full"
+}
