@@ -3,7 +3,7 @@
 Plugin Name: Complete Mortgage Blocks
 Plugin URI: http://kaleidico.com
 Description: A brief description of the Plugin.
-Version: 1.0.0
+Version: 1.0.1
 Author: Angelo Marasa
 Author URI: http://kaleidico.com
 License: GPL2
@@ -14,9 +14,9 @@ require 'puc/plugin-update-checker.php';
 use YahnisElsts\PluginUpdateChecker\v5\PucFactory;
 
 $myUpdateChecker = PucFactory::buildUpdateChecker(
-    'https://github.com/amarasa/branding-settings',
+    'https://github.com/amarasa/complete-mortgage-blocks',
     __FILE__,
-    'brand-settings-plugin'
+    'complete-mortgage-blocks'
 );
 
 add_action('admin_enqueue_scripts', 'complete_mortgage_blocks_admin_styles');
