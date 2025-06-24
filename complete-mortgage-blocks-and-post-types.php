@@ -3,7 +3,7 @@
 Plugin Name: Complete Mortgage Blocks and Post Types
 Plugin URI: http://kaleidico.com
 Description: A brief description of the Plugin.
-Version: 1.0.3
+Version: 1.1.0
 Author: Angelo Marasa
 Author URI: http://kaleidico.com
 License: GPL2
