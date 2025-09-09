@@ -49,7 +49,7 @@ if (!empty($block['anchor'])) {
                 <?php endif; ?>
                 <?php if (!empty($cta_button)): ?>
                     <div>
-                        <a class="button !block !bg-secondary hover:!bg-primary !no-underline !text-white" href="<?php esc_url($cta_button['url']); ?>"><?php echo esc_html($cta_button['title']); ?></a>
+                        <a class="button !block !bg-secondary hover:!bg-primary !no-underline !text-white" href="<?php echo $cta_button['url']; ?>"><?php echo esc_html($cta_button['title']); ?></a>
                     </div>
                 <?php endif; ?>
             </div>
