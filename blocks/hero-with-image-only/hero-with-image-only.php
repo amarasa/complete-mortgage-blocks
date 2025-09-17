@@ -1,38 +1,93 @@
 <?php
 $classes = '';
-$id = '';
-$acfKey = 'group_67d319924ffa6';
+$id_attr = '';
+$acfKey  = 'group_67d319924ffa6';
 
-// Get ACF fields
-$hero_image = get_field('hero_image');
-$edge_to_edge = get_field('edge_to_edge');
-$corners = get_field('corners') ? 'md:rounded-xl' : ''; // Controls border-radius
-$extend_container = get_field('extend_container'); // This makes the image stretch full width but not edge to edge.  64px padding left and right.
+// Block attrs
+if (!empty($block['className'])) $classes .= ' ' . esc_attr($block['className']);
+if (!empty($block['anchor']))    $id_attr  = ' id="' . esc_attr($block['anchor']) . '"';
 
-if (!empty($block['className'])) {
-    $classes .= sprintf(' %s', esc_attr($block['className']));
-}
+// ACF fields
+$hero_image      = get_field('hero_image');       // Image ID or array
+$edge_to_edge    = get_field('edge_to_edge');
+$corners         = get_field('corners') ? 'md:rounded-xl' : '';
+$extend_container = get_field('extend_container');
 
-if (!empty($block['anchor'])) {
-    $id = sprintf(' id="%s"', esc_attr($block['anchor']));
-}
-
-// Handle FocusPoint Image
-$hero_image_url = '';
-$background_position = '50% 50%'; // Default to center
-
-if (!empty($hero_image) && is_array($hero_image)) {
-    $hero_image_src = wp_get_attachment_image_src($hero_image['id'], 'large');
-    $hero_image_url = $hero_image_src[0] ?? '';
-
-    if (!empty($hero_image['focus_point'])) {
-        $focus_x = isset($hero_image['focus_point']['left']) ? $hero_image['focus_point']['left'] * 100 : 50;
-        $focus_y = isset($hero_image['focus_point']['top']) ? $hero_image['focus_point']['top'] * 100 : 50;
-        $background_position = "{$focus_x}% {$focus_y}%";
+/** Helpers **/
+if (!function_exists('vv_norm_image_id')) {
+    function vv_norm_image_id($img)
+    {
+        if (is_array($img)) {
+            if (!empty($img['ID'])) return (int)$img['ID']; // ACF array (common)
+            if (!empty($img['id'])) return (int)$img['id']; // some plugins/fields use 'id'
+        } elseif (is_numeric($img)) {
+            return (int)$img;                               // ACF Image ID
+        }
+        return 0;
     }
 }
+if (!function_exists('vv_image_url')) {
+    // Prefer wp_get_attachment_url(); fallback to array['url'] if present
+    function vv_image_url($img)
+    {
+        $id = vv_norm_image_id($img);
+        if ($id) {
+            $url = wp_get_attachment_url($id);
+            if ($url) return $url;
+        }
+        return is_array($img) && !empty($img['url']) ? $img['url'] : '';
+    }
+}
+if (!function_exists('vv_fcp_objpos')) {
+    // Read hirasso focal point and return "x% y%" (fallback center)
+    function vv_fcp_objpos($img)
+    {
+        $image_id = vv_norm_image_id($img);
+        if (!$image_id || !function_exists('fcp_get_focalpoint')) return '50% 50%';
+
+        $focus = fcp_get_focalpoint($image_id);
+        if (!is_object($focus)) return '50% 50%';
+
+        if (isset($focus->leftPercent, $focus->topPercent)) {
+            $x = (float)$focus->leftPercent;
+            $y = (float)$focus->topPercent;
+        } elseif (isset($focus->xPercent, $focus->yPercent)) {
+            $x = (float)$focus->xPercent;
+            $y = (float)$focus->yPercent;
+        } elseif (isset($focus->x, $focus->y)) { // 0–1 ratios
+            $x = (float)$focus->x * 100;
+            $y = (float)$focus->y * 100;
+        } else {
+            return '50% 50%';
+        }
+        $fmt = function ($n) {
+            return rtrim(rtrim(number_format($n, 2, '.', ''), '0'), '.');
+        };
+        return $fmt($x) . '% ' . $fmt($y) . '%';
+    }
+}
+
+// Compute background
+$hero_url = vv_image_url($hero_image);
+$hero_pos = vv_fcp_objpos($hero_image);
+
+// Classes
+$section_classes = trim(
+    'hero-with-image-only '
+        . ($edge_to_edge ? 'w-full px-0' : 'xl:container')
+        . ' ' . (!$edge_to_edge ? $corners : '')
+        . ' ' . ($extend_container ? 'extend-container' : '')
+        . ' ' . $classes
+);
+
+// Inline style: full-bleed cover + focal. Add min-height so it has room to show.
+$style = $hero_url
+    ? sprintf(
+        ' style="background-image:url(\'%s\');background-size:cover;background-repeat:no-repeat;background-position:%s;min-height:420px;width:100%%;"',
+        esc_url($hero_url),
+        esc_attr($hero_pos)
+    )
+    : '';
 ?>
 
-<section class="hero-with-image-only <?php echo esc_attr($edge_to_edge ? 'w-full px-0' : 'xl:container'); ?> <?php echo esc_attr(!$edge_to_edge ? $corners : ''); ?> <?php if ($extend_container) { ?>extend-container<?php } ?>" <?php echo $id; ?> data-block-name="<?php echo $acfKey; ?>"
-    style="background-image: url('<?php echo esc_url($hero_image_url); ?>'); background-position: <?php echo esc_attr($background_position); ?>; background-size: cover !important;">
-</section>
+<section class="<?php echo esc_attr($section_classes); ?>" <?php echo $id_attr; ?> data-block-name="<?php echo esc_attr($acfKey); ?>" <?php echo $style; ?>></section>
