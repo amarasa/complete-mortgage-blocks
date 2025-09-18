@@ -84,7 +84,7 @@ $has_foreground  = (bool)$random_img_url;
 $random_img_alt  = $random_img_id ? (get_post_meta($random_img_id, '_wp_attachment_image_alt', true) ?: ($headline ?: 'Hero image')) : ($headline ?: 'Hero image');
 ?>
 
-<section class="hero-with-squared-image relative lg:h-[575px] xl:h-[700px] w-full<?php echo esc_attr($classes); ?>" <?php echo $id_attr; ?> data-block-name="<?php echo esc_attr($acfKey); ?>">
+<section class="hero-with-squared-image relative lg:h-[575px] xl:h-[700px] w-full cmt-block <?php echo esc_attr($classes); ?>" <?php echo $id_attr; ?> data-block-name="<?php echo esc_attr($acfKey); ?>">
     <!-- Right half background (focal-aware) -->
     <?php if ($bg_url): ?>
         <div class="hero-with-squared-image-background hidden lg:block absolute w-1/2 h-full right-0 rounded-bl-[75px]"

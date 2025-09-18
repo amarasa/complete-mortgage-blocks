@@ -91,7 +91,7 @@ $bg_style = $bg_url
     : '';
 ?>
 
-<section class="<?php echo esc_attr($section_classes); ?>" <?php echo $id_attr; ?> data-block-name="<?php echo esc_attr($acfKey); ?>" <?php echo $bg_style; ?>>
+<section class="cmt-block <?php echo esc_attr($section_classes); ?>" <?php echo $id_attr; ?> data-block-name="<?php echo esc_attr($acfKey); ?>" <?php echo $bg_style; ?>>
     <?php if ($bg_url): ?>
         <div class="big-block-cta-image-overlay absolute inset-0 bg-black/50 <?php echo $corners ? 'xl:rounded-xl' : ''; ?>"></div>
     <?php endif; ?>

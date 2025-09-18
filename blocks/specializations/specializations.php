@@ -108,7 +108,7 @@ if ($bg_url) {
 }
 ?>
 
-<section class="<?php echo esc_attr($section_classes); ?>" <?php echo $id_attr; ?> data-block-name="<?php echo esc_attr($acfKey); ?>" <?php echo $bg_style; ?>>
+<section class="<?php echo esc_attr($section_classes); ?> cmt-block" <?php echo $id_attr; ?> data-block-name="<?php echo esc_attr($acfKey); ?>" <?php echo $bg_style; ?>>
 
     <!-- Default overlay for content readability -->
     <div class="overlay bg-black/50 h-full w-full absolute inset-0 z-10 <?php echo $corners ? 'md:rounded-xl' : ''; ?>"></div>

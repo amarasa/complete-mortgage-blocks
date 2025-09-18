@@ -99,7 +99,7 @@ if (!function_exists('vv_render_focal_box')) {
 }
 ?>
 
-<section class="multiimage-hero relative w-full pb-16 <?php echo esc_attr($classes); ?>" <?php echo $id_attr; ?> data-block-name="<?php echo esc_attr($acfKey); ?>">
+<section class="multiimage-hero cmt-block relative w-full pb-16 <?php echo esc_attr($classes); ?>" <?php echo $id_attr; ?> data-block-name="<?php echo esc_attr($acfKey); ?>">
     <div class="max-w-[1300px] mx-auto px-8 py-12">
         <div class="grid grid-cols-12 lg:gap-x-20 items-center">
             <!-- Left Content -->

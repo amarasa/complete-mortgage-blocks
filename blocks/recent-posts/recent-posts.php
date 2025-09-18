@@ -91,7 +91,7 @@ if ($post_display_type === 1 && !empty($hand_selected_posts)) {
 $recent_posts = new WP_Query($query_args);
 ?>
 
-<section class="recent-posts <?php echo esc_attr($classes); ?>" <?php echo $id_attr; ?> data-block-name="<?php echo esc_attr($acfKey); ?>">
+<section class="recent-posts cmt-block <?php echo esc_attr($classes); ?>" <?php echo $id_attr; ?> data-block-name="<?php echo esc_attr($acfKey); ?>">
     <div class="container mx-auto py-12 px-8">
         <h2 class="font-bold text-center mb-8"><?php if (get_field('headline')) {
                                                     echo get_field('headline');

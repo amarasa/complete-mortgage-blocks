@@ -52,7 +52,7 @@ if (!function_exists('vv_fcp_objpos')) {
 }
 ?>
 
-<section class="media-left-content-right<?php echo esc_attr($classes ? ' ' . $classes : ''); ?>" <?php echo $id_attr; ?> data-block-name="<?php echo esc_attr($acfKey); ?>">
+<section class="media-left-content-right cmt-block <?php echo esc_attr($classes ? ' ' . $classes : ''); ?>" <?php echo $id_attr; ?> data-block-name="<?php echo esc_attr($acfKey); ?>">
     <div class="container px-8">
         <div class="grid grid-cols-12 md:gap-x-8">
             <div class="col-span-12 md:col-span-6 lg:col-span-7 mb-3 md:mb-0">

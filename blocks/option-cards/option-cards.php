@@ -17,7 +17,7 @@ if (!empty($block['anchor'])) {
 }
 ?>
 
-<section class="option-cards <?php echo esc_attr($classes); ?>" <?php echo $id; ?> data-block-name="<?php echo $acfKey; ?>">
+<section class="option-cards cmt-block <?php echo esc_attr($classes); ?>" <?php echo $id; ?> data-block-name="<?php echo $acfKey; ?>">
     <div class="container px-8">
         <?php if ($headline): ?>
             <h2 class="lg:text-center mb-8"><?php echo esc_html($headline); ?></h2>

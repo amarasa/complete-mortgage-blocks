@@ -13,7 +13,7 @@ if (!empty($block['anchor'])) {
 
 $disclaimer = get_field("disclaimer_content");
 ?>
-<section class="disclaimer<?php echo esc_attr($classes); ?> py-3" <?php echo $id; ?> data-block-name="<?php echo $acfKey; ?>">
+<section class="disclaimer cmt-block <?php echo esc_attr($classes); ?> py-3" <?php echo $id; ?> data-block-name="<?php echo $acfKey; ?>">
     <div class="disclaimer-text text-sm">
         <?= $disclaimer;  ?>
     </div>

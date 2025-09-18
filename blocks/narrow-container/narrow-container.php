@@ -12,6 +12,6 @@ if (!empty($block['anchor'])) {
 }
 
 ?>
-<div class="narrow-container max-w-[800px] px-8 mx-auto <?php echo esc_attr($classes); ?>" <?php echo $id; ?> data-block-name="<?php echo $acfKey; ?>">
+<div class="narrow-container max-w-[800px] cmt-block px-8 mx-auto <?php echo esc_attr($classes); ?>" <?php echo $id; ?> data-block-name="<?php echo $acfKey; ?>">
     <InnerBlocks />
 </div>

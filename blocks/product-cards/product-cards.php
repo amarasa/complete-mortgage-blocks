@@ -116,9 +116,9 @@ if (!function_exists('vv_admin_badge')) {
 ?>
 <span class="sr-only bg-tertiary"></span>
 <span class="sr-only bg-lightGrey"></span>
-<div class="product-cards <?php echo esc_attr(trim($bg_classes . $classes)); ?> bg-<?php echo get_field('which_solid_color'); ?> mb-12 pb-[20%]" <?php echo $id_attr; ?> data-block-name="<?php echo esc_attr($acfKey); ?>" <?php if (get_field('background_image_or_solid_color') == true) {
-                                                                                                                                                                                                                                echo $bg_style;
-                                                                                                                                                                                                                            } ?>>
+<div class="product-cards cmt-block <?php echo esc_attr(trim($bg_classes . $classes)); ?> bg-<?php echo get_field('which_solid_color'); ?> mb-12 pb-[20%]" <?php echo $id_attr; ?> data-block-name="<?php echo esc_attr($acfKey); ?>" <?php if (get_field('background_image_or_solid_color') == true) {
+                                                                                                                                                                                                                                            echo $bg_style;
+                                                                                                                                                                                                                                        } ?>>
     <?php if ($headline !== '') : ?>
         <div class="px-8 pt-[72px] pb-[80px] relative">
             <h2 class="text-white text-center mb-[56px] lg:mb-0">

@@ -20,7 +20,7 @@ if (!empty($block['anchor'])) {
 }
 ?>
 
-<section class="why-us bg-gray-100 pt-20 pb-12 <?php echo esc_attr($classes); ?>" <?php echo $id; ?> data-block-name="<?php echo esc_attr($acfKey); ?>">
+<section class="why-us bg-gray-100 pt-20 cmt-block pb-12 <?php echo esc_attr($classes); ?>" <?php echo $id; ?> data-block-name="<?php echo esc_attr($acfKey); ?>">
     <div class="container mx-auto px-8">
         <div class="grid grid-cols-12 md:gap-x-8 lg:gap-x-16">
             <?php if ($include_left_column): ?>

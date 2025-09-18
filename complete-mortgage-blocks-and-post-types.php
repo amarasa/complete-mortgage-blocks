@@ -2,11 +2,10 @@
 /*
 Plugin Name: Complete Mortgage Blocks and Post Types
 Plugin URI: http://kaleidico.com
-Description: A brief description of the Plugin.
-Version: 2.5
+Description: 
+Version: 2.6
 Author: Angelo Marasa
 Author URI: http://kaleidico.com
-License: GPL2
 */
 
 require 'puc/plugin-update-checker.php';

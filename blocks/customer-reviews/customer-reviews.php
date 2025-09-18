@@ -12,7 +12,7 @@ if (!empty($block['anchor'])) {
 }
 ?>
 
-<section class="customer-reviews <?php echo esc_attr($classes); ?>" <?php echo $id; ?> data-block-name="<?php echo $acfKey; ?>">
+<section class="customer-reviews cmt-block <?php echo esc_attr($classes); ?>" <?php echo $id; ?> data-block-name="<?php echo $acfKey; ?>">
     <div class="container mx-auto py-12">
         <h2 class="text-3xl font-bold text-center mb-8">
             <?php if (get_field('headline')) { ?>

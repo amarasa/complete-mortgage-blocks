@@ -122,7 +122,7 @@ if (!empty($bg_rows) && is_array($bg_rows)) {
     </style>
 <?php endif; ?>
 
-<section class="hero-full-width relative bg-cover bg-no-repeat w-full h-full<?php echo esc_attr($classes); ?>" <?php echo $id_attr; ?> data-block-name="<?php echo esc_attr($acfKey); ?>">
+<section class="hero-full-width cmt-block relative bg-cover bg-no-repeat w-full h-full<?php echo esc_attr($classes); ?>" <?php echo $id_attr; ?> data-block-name="<?php echo esc_attr($acfKey); ?>">
     <?php if ($turn_on_overlay): ?>
         <div class="hero-full-width-overlay z-10 opacity-70 absolute inset-0"
             style="background: linear-gradient(to bottom, <?php echo esc_attr($top_gradient_overlay); ?> 0%, <?php echo esc_attr($bottom_gradient_overlay); ?> 100%);">

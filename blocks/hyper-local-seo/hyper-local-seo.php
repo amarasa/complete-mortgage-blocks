@@ -17,7 +17,7 @@ if (!empty($block['anchor'])) {
 }
 ?>
 
-<section class="hyper-local-seo py-10 <?php echo esc_attr($classes); ?>" <?php echo $id; ?> data-block-name="<?php echo $acfKey; ?>">
+<section class="hyper-local-seo py-10 cmt-block <?php echo esc_attr($classes); ?>" <?php echo $id; ?> data-block-name="<?php echo $acfKey; ?>">
     <div class="container px-8">
         <?php if ($headline): ?>
             <h2 class="text-3xl font-bold text-center mb-8"><?php echo esc_html($headline); ?></h2>

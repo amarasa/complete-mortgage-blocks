@@ -62,7 +62,7 @@ $image_id   = vv_norm_image_id($image);
 $obj_pos    = vv_fcp_objpos($image);
 $img_alt    = is_array($image) && !empty($image['alt']) ? $image['alt'] : ($headline ?: 'Image');
 ?>
-<section class="two-column-product-block<?php echo $classes ? ' ' . esc_attr($classes) : ''; ?>" <?php echo $id_attr; ?> data-block-name="<?php echo esc_attr($acfKey); ?>">
+<section class="two-column-product-block cmt-block <?php echo $classes ? ' ' . esc_attr($classes) : ''; ?>" <?php echo $id_attr; ?> data-block-name="<?php echo esc_attr($acfKey); ?>">
     <div class="container px-8">
         <div class="grid grid-cols-12 md:gap-x-16 items-center">
             <!-- Image Column -->

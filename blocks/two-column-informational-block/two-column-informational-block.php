@@ -19,20 +19,17 @@ if (!empty($block['anchor'])) {
 }
 ?>
 
-<section class="two-column-informational-block<?php echo esc_attr($classes); ?> pb-10" <?php echo $id; ?> data-block-name="<?php echo $acfKey; ?>">
+<section class="two-column-informational-block cmt-block <?php echo esc_attr($classes); ?> pb-10" <?php echo $id; ?> data-block-name="<?php echo $acfKey; ?>">
     <div class="container px-8">
-        <?php if ($headline) { ?>
-            <div class="grid grid-cols-12">
-                <div class="col-span-12 lg:col-span-6">
-                    <h2 class="mb-5"><?php echo esc_html($headline); ?></h2>
-                </div>
-            </div>
-
-        <?php } ?>
         <div class="grid grid-cols-12 md:gap-x-16">
             <div class="col-span-12 md:col-span-6">
                 <div class="mb-8">
-                    <?php echo $content; ?>
+                    <?php if ($headline) { ?>
+                        <h2 class="mb-5"><?php echo esc_html($headline); ?></h2>
+                    <?php } ?>
+                    <?php if ($content) { ?>
+                        <?php echo $content; ?>
+                    <?php } ?>
                 </div>
             </div>
             <div class="col-span-12 md:col-span-6">

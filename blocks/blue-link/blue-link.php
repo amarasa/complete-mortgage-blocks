@@ -12,7 +12,7 @@ if (!empty($block['anchor'])) {
 }
 
 ?>
-<section class="blue-link<?php echo esc_attr($classes); ?>" <?php echo $id; ?> data-block-name="<?php echo $acfKey; ?>">
+<section class="blue-link cmt-block <?php echo esc_attr($classes); ?>" <?php echo $id; ?> data-block-name="<?php echo $acfKey; ?>">
     <?php
     // Retrieve the ACF link field
     $blue_link = get_field('blue_link');

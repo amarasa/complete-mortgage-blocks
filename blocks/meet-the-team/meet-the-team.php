@@ -84,7 +84,7 @@ if ($display_type === 'Hand-Select Members' && !empty($hand_selected)) {
 $team_members = new WP_Query($query_args);
 ?>
 
-<section class="meet-the-team <?php echo esc_attr($classes); ?>" <?php echo $id_attr; ?> data-block-name="<?php echo esc_attr($acfKey); ?>">
+<section class="meet-the-team cmt-block <?php echo esc_attr($classes); ?>" <?php echo $id_attr; ?> data-block-name="<?php echo esc_attr($acfKey); ?>">
     <div class="container px-8 py-12">
         <?php if ($headline): ?>
             <h2 class="text-4xl font-bold text-center pb-8"><?php echo esc_html($headline); ?></h2>

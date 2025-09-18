@@ -68,7 +68,7 @@ if ($random_img_id) {
     $random_img_alt = get_post_meta($random_img_id, '_wp_attachment_image_alt', true) ?: ($headline ?: 'Hero image');
 }
 ?>
-<section class="hero-with-circular-image<?php echo $classes ? ' ' . esc_attr($classes) : ''; ?>" <?php echo $id_attr; ?> data-block-name="<?php echo esc_attr($acfKey); ?>">
+<section class="hero-with-circular-image cmt-block <?php echo $classes ? ' ' . esc_attr($classes) : ''; ?>" <?php echo $id_attr; ?> data-block-name="<?php echo esc_attr($acfKey); ?>">
     <div class="container px-8 my-10">
         <div class="grid grid-cols-12 lg:gap-x-24 items-center">
             <div class="col-span-12 lg:col-span-5">

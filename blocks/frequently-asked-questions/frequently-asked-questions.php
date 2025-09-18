@@ -13,7 +13,7 @@ if (!empty($block['anchor'])) {
 
 
 ?>
-<section class="frequently-asked-questions px-8 lg:px-0 max-w-[730px] mb-12 mx-auto <?php echo esc_attr($classes); ?>" <?php echo $id; ?> data-block-name="<?php echo $acfKey; ?>">
+<section class="frequently-asked-questions cmt-block px-8 lg:px-0 max-w-[730px] mb-12 mx-auto <?php echo esc_attr($classes); ?>" <?php echo $id; ?> data-block-name="<?php echo $acfKey; ?>">
     <h2><?php echo get_field('headline'); ?></h2>
 
     <?php if (get_field('introduction_text')) { ?>

@@ -23,7 +23,7 @@ if (!empty($block['anchor'])) {
 $overlap_class = !empty($overlap) ? 'lg:-mt-20 z-20 relative' : '';
 ?>
 
-<section class="branch-detail <?php echo esc_attr($classes); ?>" <?php echo $id; ?> data-block-name="<?php echo $acfKey; ?>">
+<section class="branch-detail cmt-block <?php echo esc_attr($classes); ?>" <?php echo $id; ?> data-block-name="<?php echo $acfKey; ?>">
     <div class="xl:container mx-auto items-center px-8 py-12 bg-[#ededed] lg:px-20 lg:py-16 <?php echo esc_attr($corners . ' ' . $overlap_class); ?>">
         <h2 class=" text-4xl font-bold text-primary"><?php echo esc_html($branch_name); ?></h2>
         <div class="grid grid-cols-12 lg:gap-x-16">

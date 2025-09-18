@@ -90,4 +90,4 @@ $style = $hero_url
     : '';
 ?>
 
-<section class="<?php echo esc_attr($section_classes); ?>" <?php echo $id_attr; ?> data-block-name="<?php echo esc_attr($acfKey); ?>" <?php echo $style; ?>></section>
+<section class="<?php echo esc_attr($section_classes); ?> cmt-block" <?php echo $id_attr; ?> data-block-name="<?php echo esc_attr($acfKey); ?>" <?php echo $style; ?>></section>

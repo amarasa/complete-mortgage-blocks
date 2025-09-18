@@ -38,7 +38,7 @@ $headline_class = !$background_switch ? 'text-white' : '';
 $icon_class     = !$background_switch ? 'bg-white text-primary' : 'bg-primary text-white';
 $button_class   = !$background_switch ? 'button-white !no-underline' : '';
 ?>
-<section class="<?php echo esc_attr($section_classes); ?>" <?php echo $id; ?> data-block-name="<?php echo esc_attr($acfKey); ?>">
+<section class="<?php echo esc_attr($section_classes); ?> cmt-block" <?php echo $id; ?> data-block-name="<?php echo esc_attr($acfKey); ?>">
     <div class="container px-8">
         <?php if ($display_style): ?>
             <?php if ($headline): ?>

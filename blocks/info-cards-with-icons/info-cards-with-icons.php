@@ -9,7 +9,7 @@ $acfKey = ''; // Set your ACF block name key if needed
     <div class="shadow-<?php echo esc_attr($size); ?> visibility-hidden"></div>
 <?php endforeach; ?>
 
-<section class="info-cards-with-icons<?php echo $classes; ?>" <?php echo $id; ?> data-block-name="<?php echo esc_attr($acfKey); ?>">
+<section class="info-cards-with-icons cmt-block <?php echo $classes; ?>" <?php echo $id; ?> data-block-name="<?php echo esc_attr($acfKey); ?>">
     <div class="container px-8">
         <div class="flex flex-wrap gap-6 justify-center">
             <?php while (have_rows('info_cards')) : the_row(); ?>

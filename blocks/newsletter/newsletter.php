@@ -14,7 +14,7 @@ if (!empty($block['anchor'])) {
 $headline = get_field('headline');
 $newsletter_form = get_field('form');
 ?>
-<section class="newsletter<?php echo esc_attr($classes); ?> bg-[#eee] pt-12 pb-16" <?php echo $id; ?> data-block-name="<?php echo $acfKey; ?>">
+<section class="newsletter<?php echo esc_attr($classes); ?> cmt-block bg-[#eee] pt-12 pb-16" <?php echo $id; ?> data-block-name="<?php echo $acfKey; ?>">
     <div class="container px-8">
         <?php if ($headline): ?>
             <h2 class="mb-5"><?php echo esc_html($headline); ?></h2>

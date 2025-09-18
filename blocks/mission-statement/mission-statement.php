@@ -19,7 +19,7 @@ $buttons = get_field('buttons');
 
 
 ?>
-<section class="mission-statement<?php echo esc_attr($classes); ?> <?php if ($overlap_previous_block) { ?>-mt-20 z-20 relative<?php } ?>" <?php echo $id; ?> data-block-name="<?php echo $acfKey; ?>">
+<section class="mission-statement cmt-block <?php echo esc_attr($classes); ?> <?php if ($overlap_previous_block) { ?>-mt-20 z-20 relative<?php } ?>" <?php echo $id; ?> data-block-name="<?php echo $acfKey; ?>">
     <div class="container max-w-[991px] mx-auto text-center lg:rounded-xl p-8 <?php if ($enable_background_color) {
                                                                                 ?>bg-[#ededed]<?php } ?>">
         <?php if ($headline) { ?>
