@@ -123,7 +123,7 @@ $bg_pos = vv_fcp_objpos($background_image);
                     <?php else: ?>
                         <div class="logo-flex flex flex-wrap items-center justify-center gap-6">
                             <?php if (have_rows('logos')): while (have_rows('logos')): the_row(); ?>
-                                    <div class="eh-logo-card logo-card <?php echo $enable_bg_color ? 'border-[1px] border-solid border-primary bg-white' : ''; ?> bg-card rounded-lg p-6 shadow-sm border border-border hover:shadow-md transition-all duration-300 flex items-center justify-center md:max-w-[200px] w-full">
+                                    <div class="eh-logo-card logo-card <?php echo $enable_bg_color ? 'border-[1px] border-solid border-primary bg-white' : ''; ?> bg-card bg-white rounded-lg p-6 shadow-sm border border-border hover:shadow-md transition-all duration-300 flex items-center justify-center md:max-w-[175px] w-full">
                                         <?php
                                         $logo    = get_sub_field('logo');
                                         $logo_id = is_array($logo) ? ($logo['ID'] ?? 0) : (int)$logo;

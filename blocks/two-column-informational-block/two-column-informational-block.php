@@ -25,7 +25,7 @@ if (!empty($block['anchor'])) {
             <div class="col-span-12 md:col-span-6">
                 <div class="mb-8">
                     <?php if ($headline) { ?>
-                        <h2 class="mb-5"><?php echo esc_html($headline); ?></h2>
+                        <h2><?php echo esc_html($headline); ?></h2>
                     <?php } ?>
                     <?php if ($content) { ?>
                         <?php echo $content; ?>
@@ -34,7 +34,7 @@ if (!empty($block['anchor'])) {
             </div>
             <div class="col-span-12 md:col-span-6">
                 <?php if ($sub_headline) { ?>
-                    <h3 class="mb-5 font-bold text-lg mt-5"><?php echo esc_html($sub_headline); ?></h3>
+                    <h3><?php echo esc_html($sub_headline); ?></h3>
                 <?php } ?>
 
                 <?php if (!empty($informational_list)): ?>

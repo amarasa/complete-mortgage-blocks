@@ -42,7 +42,7 @@ $button_class   = !$background_switch ? 'button-white !no-underline' : '';
     <div class="container px-8">
         <?php if ($display_style): ?>
             <?php if ($headline): ?>
-                <h2 class="max-w-lg mx-auto text-center mb-8 <?php echo esc_attr($headline_class); ?>">
+                <h2 class="max-w-lg mx-auto text-center <?php echo esc_attr($headline_class); ?>">
                     <?php echo esc_html($headline); ?>
                 </h2>
             <?php endif; ?>
@@ -55,10 +55,10 @@ $button_class   = !$background_switch ? 'button-white !no-underline' : '';
 
             <!-- One Column Layout -->
             <?php if (!empty($list_items)): ?>
-                <div class="mb-8 flex flex-wrap justify-between gap-x-4 gap-y-4">
+                <div class="flex flex-wrap justify-between gap-x-4 gap-y-4">
                     <?php $pos = 1; ?>
                     <?php foreach ($list_items as $item): ?>
-                        <div class="text-center mb-8 md:w-1/3 lg:w-1/4">
+                        <div class="text-center md:w-1/3 lg:w-1/4">
                             <?php if ($display_numbers) { ?>
                                 <div class="<?php echo esc_attr($icon_class); ?> font-bold w-[38px] h-[38px] rounded-full relative mx-auto mb-4">
                                     <span class="block absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2">

@@ -43,7 +43,7 @@ foreach ($statistics as $index => $stat) {
 <section class="statistics pb-16 cmt-block <?php echo esc_attr($classes); ?>" <?php echo $id; ?> data-block-name="<?php echo esc_attr($acfKey); ?>">
     <div class="container px-8">
         <?php if ($headline): ?>
-            <h2 class="text-center mb-12"><?php echo esc_html($headline); ?></h2>
+            <h2 class="text-center"><?php echo esc_html($headline); ?></h2>
         <?php endif; ?>
 
         <div class="grid grid-cols-12 md:gap-x-8">

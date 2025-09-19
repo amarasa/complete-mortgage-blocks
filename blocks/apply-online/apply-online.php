@@ -37,7 +37,7 @@ if (!empty($block['anchor'])) {
             </div>
             <div class="col-span-12 md:col-span-6 lg:col-span-5">
                 <?php if (!empty($lead_path_entry_headline)): ?>
-                    <h3 class="text-xl mb-6"><?php echo wp_kses_post($lead_path_entry_headline); ?></h3>
+                    <h3><?php echo wp_kses_post($lead_path_entry_headline); ?></h3>
                 <?php endif; ?>
                 <?php if (!empty($lead_path_form)): ?>
                     <div class="lead-form">

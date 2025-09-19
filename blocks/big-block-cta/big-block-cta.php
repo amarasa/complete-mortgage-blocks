@@ -98,7 +98,7 @@ $bg_style = $bg_url
 
     <div class="big-block-cta-content relative z-20">
         <?php if (!empty($headline)): ?>
-            <h2 class="text-3xl font-bold text-white"><?php echo esc_html($headline); ?></h2>
+            <h2 class="text-white"><?php echo esc_html($headline); ?></h2>
         <?php endif; ?>
 
         <?php if (!empty($cta_content)): ?>

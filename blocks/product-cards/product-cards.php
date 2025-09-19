@@ -120,8 +120,8 @@ if (!function_exists('vv_admin_badge')) {
                                                                                                                                                                                                                                             echo $bg_style;
                                                                                                                                                                                                                                         } ?>>
     <?php if ($headline !== '') : ?>
-        <div class="px-8 pt-[72px] pb-[80px] relative">
-            <h2 class="text-white text-center mb-[56px] lg:mb-0">
+        <div class="px-8 pt-[72px] pb-[30px] relative">
+            <h2 class="text-white text-center">
                 <?php echo esc_html($headline); ?>
             </h2>
             <?php
@@ -185,7 +185,7 @@ if (!function_exists('vv_admin_badge')) {
 
                     <div class="product-card-content border border-solid border-[#c6c6cd] pt-6 px-8 pb-6 bg-white">
                         <?php if ($title !== '') : ?>
-                            <h3 class="eh-productcardtitle product-card-title text-xl mb-5"><?php echo esc_html($title); ?></h3>
+                            <h3 class="eh-productcardtitle product-card-title"><?php echo esc_html($title); ?></h3>
                         <?php endif; ?>
 
                         <?php if ($description !== '') : ?>

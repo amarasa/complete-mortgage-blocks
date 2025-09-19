@@ -93,9 +93,9 @@ $recent_posts = new WP_Query($query_args);
 
 <section class="recent-posts cmt-block <?php echo esc_attr($classes); ?>" <?php echo $id_attr; ?> data-block-name="<?php echo esc_attr($acfKey); ?>">
     <div class="container mx-auto py-12 px-8">
-        <h2 class="font-bold text-center mb-8"><?php if (get_field('headline')) {
-                                                    echo get_field('headline');
-                                                } else { ?>Recent Articles<?php } ?></h2>
+        <h2 class="text-center"><?php if (get_field('headline')) {
+                                    echo get_field('headline');
+                                } else { ?>Recent Articles<?php } ?></h2>
 
         <?php if ($recent_posts->have_posts()) : ?>
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">

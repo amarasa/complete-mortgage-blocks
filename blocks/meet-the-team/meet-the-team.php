@@ -87,7 +87,7 @@ $team_members = new WP_Query($query_args);
 <section class="meet-the-team cmt-block <?php echo esc_attr($classes); ?>" <?php echo $id_attr; ?> data-block-name="<?php echo esc_attr($acfKey); ?>">
     <div class="container px-8 py-12">
         <?php if ($headline): ?>
-            <h2 class="text-4xl font-bold text-center pb-8"><?php echo esc_html($headline); ?></h2>
+            <h2 class="text-center"><?php echo esc_html($headline); ?></h2>
         <?php endif; ?>
 
         <?php if ($team_members->have_posts()): ?>
@@ -144,7 +144,7 @@ $team_members = new WP_Query($query_args);
                             </a><?php endif; ?>
 
                         <!-- Name -->
-                        <h3 class="mt-2 text-xl font-bold">
+                        <h3 class="!my-2 text-xl font-bold">
                             <?php if ($clickable): ?>
                                 <a href="<?php echo esc_url(get_permalink($loan_officer_id)); ?>" class="!no-underline text-secondary hover:text-primary">
                                     <?php echo esc_html($show_full_name ? "$first_name $last_name" : $first_name); ?>
@@ -156,7 +156,7 @@ $team_members = new WP_Query($query_args);
 
                         <!-- Title -->
                         <?php if ($show_title && $title): ?>
-                            <div class="mt-2 uppercase font-bold tracking-[1.5px] text-sm"><?php echo esc_html($title); ?></div>
+                            <div class="uppercase font-bold tracking-[1.5px] text-sm"><?php echo esc_html($title); ?></div>
                         <?php endif; ?>
 
                         <!-- NMLS -->

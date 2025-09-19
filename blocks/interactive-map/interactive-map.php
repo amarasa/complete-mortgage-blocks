@@ -30,7 +30,7 @@ $js_states = json_encode($highlighted_states);
 ?>
 <section class="interactive-map cmt-block <?php echo esc_attr($classes); ?> md:pb-10" <?php echo $id; ?> data-block-name="<?php echo $acfKey; ?>">
     <div class="container px-8">
-        <h2 class="text-center !mb-12"><?= esc_html($headline); ?></h2>
+        <h2 class="text-center"><?= esc_html($headline); ?></h2>
         <?php $display_style = get_field('display_style');
         if ($display_style) { ?>
             <div class="grid grid-cols-12 lg:gap-x-8 items-center">
