@@ -9,6 +9,8 @@ if (!empty($block['anchor']))   $id_attr = ' id="' . esc_attr($block['anchor']) 
 $is_slider        = (bool) get_field('enable_slider_version');
 $enable_bg_color  = (bool) get_field('enable_grey_background_color');
 $background_image = get_field('background_image');
+$top_gradient_overlay = get_field('top_gradient_overlay');
+$bottom_gradient_overlay = get_field('bottom_gradient_overlay');
 
 /** Helpers **/
 if (!function_exists('vv_norm_image_id')) {
@@ -70,13 +72,18 @@ $bg_pos = vv_fcp_objpos($background_image);
 <span class="bg-lightGrey sr-only border-primary"></span>
 <section class="trusted-by cmt-block relative <?php echo esc_attr($classes); ?> py-16 <?php echo $enable_bg_color ? 'bg-lightGrey' : ''; ?>" <?php echo $id_attr; ?> data-block-name="<?php echo esc_attr($acfKey); ?>">
     <?php if ($bg_url): ?>
+        <?php if (get_field('enable_background_image_with_gradient')) { ?>
+            <div class="trusted-by-gradient-background absolute z-20 h-full w-full left-0 top-0" style="background:
+    linear-gradient(to bottom, <?php echo $top_gradient_overlay; ?>, rgba(0,0,0,0)) top,
+    linear-gradient(to top, <?php echo $bottom_gradient_overlay; ?>, rgba(0,0,0,0)) bottom;"></div>
+        <?php } ?>
         <div class="trusted-by-background-image absolute inset-0"
             style="background-image:url('<?php echo esc_url($bg_url); ?>');background-size:cover;background-repeat:no-repeat;background-position:<?php echo esc_attr($bg_pos); ?>;">
         </div>
         <div class="trusted-by-background-image-overlay absolute z-10 inset-0"
             style="background: linear-gradient(to bottom, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.4) 100%);">
         </div>
-        <div class="content-overlay relative z-10">
+        <div class="content-overlay relative z-30">
         <?php endif; ?>
 
         <div class="container px-8">
