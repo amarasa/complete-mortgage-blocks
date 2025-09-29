@@ -34,11 +34,11 @@ if (!empty($block['anchor'])) {
             </div>
             <div class="col-span-12 md:col-span-6">
                 <?php if ($sub_headline) { ?>
-                    <h3><?php echo esc_html($sub_headline); ?></h3>
+                    <p class="font-bold font-bold text-xl mt-0"><?php echo esc_html($sub_headline); ?></p>
                 <?php } ?>
 
                 <?php if (!empty($informational_list)): ?>
-                    <ul class="checklist">
+                    <ul class=" checklist">
                         <?php foreach ($informational_list as $item): ?>
                             <li><?php echo esc_html($item['list_item']); ?></li>
                         <?php endforeach; ?>

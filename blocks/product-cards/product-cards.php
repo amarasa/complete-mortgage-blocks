@@ -82,7 +82,7 @@ $bg_url  = vv_image_url($bg_image);
 $bg_pos  = vv_fcp_objpos($bg_image);
 $bg_has  = ($bg_url !== '');
 
-$bg_classes = $bg_has ? 'bg-cover' : 'bg-primary'; // drop 'bg-center'; we control via inline style
+$bg_classes = $bg_has ? 'bg-cover' : ''; // drop 'bg-center'; we control via inline style
 $bg_style   = $bg_has
     ? ' style="background-image:url(' . esc_url($bg_url) . ');background-size:cover;background-repeat:no-repeat;background-position:' . esc_attr($bg_pos) . ';"'
     : '';
@@ -116,12 +116,14 @@ if (!function_exists('vv_admin_badge')) {
 ?>
 <span class="sr-only bg-tertiary"></span>
 <span class="sr-only bg-lightGrey"></span>
-<div class="product-cards cmt-block <?php echo esc_attr(trim($bg_classes . $classes)); ?> bg-<?php echo get_field('which_solid_color'); ?> mb-12 pb-[20%]" <?php echo $id_attr; ?> data-block-name="<?php echo esc_attr($acfKey); ?>" <?php if (get_field('background_image_or_solid_color') == true) {
-                                                                                                                                                                                                                                            echo $bg_style;
-                                                                                                                                                                                                                                        } ?>>
+<div class="product-cards cmt-block bg-<?php echo get_field('which_solid_color'); ?> mb-12 pb-[20%]" <?php echo $id_attr; ?> data-block-name="<?php echo esc_attr($acfKey); ?>" <?php if (get_field('background_image_or_solid_color') == true) {
+                                                                                                                                                                                    echo $bg_style;
+                                                                                                                                                                                } ?>>
     <?php if ($headline !== '') : ?>
         <div class="px-8 pt-[72px] pb-[30px] relative">
-            <h2 class="text-white text-center">
+            <h2 class="text-white text-center <?php if (get_field('which_solid_color') == 'lightGrey') {
+                                                    echo '!text-primary';
+                                                } ?>">
                 <?php echo esc_html($headline); ?>
             </h2>
             <?php
