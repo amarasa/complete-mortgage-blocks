@@ -84,7 +84,7 @@ if ($random_img_id) {
                     <div class="flex gap-x-4 flex-wrap">
                         <?php foreach ($buttons as $button):
                             if (empty($button['button'])) continue; ?>
-                            <div class="flex-grow">
+                            <div class="flex-grow mb-3 lg:mb-0">
                                 <a class="button !no-underline !text-white !w-full text-center"
                                     href="<?php echo esc_url($button['button']['url']); ?>"
                                     target="<?php echo esc_attr($button['button']['target'] ?? '_self'); ?>">

@@ -28,7 +28,7 @@ $html_content = get_field('html_content');
 </style>
 <section class="content-with-list-left--html-block-right cmt-block <?php echo esc_attr($classes); ?> py-20" <?php echo $id; ?> data-block-name="<?php echo $acfKey; ?>">
     <div class="container px-8">
-        <div class="grid grid-cols-12 items-center gap-x-8">
+        <div class="grid grid-cols-12 items-center lg:gap-x-8">
             <div class="col-span-12 lg:col-span-6 mb-4">
                 <?php if ($headline) { ?>
                     <h2><?php echo $headline; ?></h2>

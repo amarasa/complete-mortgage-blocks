@@ -24,7 +24,7 @@ if (!empty($block['anchor'])) {
         <?php endif; ?>
 
         <?php if (!empty($list)): ?>
-            <div class="grid grid-cols-12 gap-x-8">
+            <div class="grid grid-cols-12 md:gap-x-8">
                 <?php foreach ($list as $item): ?>
                     <div class="col-span-12 md:col-span-6 lg:col-span-4 mb-8">
                         <?php if ($use_hyperlinks && !empty($item['link_item'])): ?>
