@@ -3,7 +3,7 @@
 Plugin Name: Complete Mortgage Blocks and Post Types
 Plugin URI: http://kaleidico.com
 Description: 
-Version: 2.81
+Version: 2.83
 Author: Angelo Marasa
 Author URI: http://kaleidico.com
 */
@@ -25,19 +25,19 @@ foreach ($directories as $dir) {
 use YahnisElsts\PluginUpdateChecker\v5\PucFactory;
 
 $myUpdateChecker = PucFactory::buildUpdateChecker(
-    'http://206.189.194.86/api/license/verify', // Your licensing system API endpoint
+    'https://github.com/amarasa/complete-mortgage-blocks', // GitHub Repository
     __FILE__,
     'complete-mortgage-blocks'
 );
 
-// Retrieve the license key from the stored option.
-$myUpdateChecker->addQueryArgFilter(function (array $queryArgs) {
-    $license_key = get_option('cmb_license_key', '');
-    $queryArgs['license_key'] = $license_key;
-    $queryArgs['plugin_slug']  = 'complete-mortgage-blocks';
-    $queryArgs['domain']       = home_url();
-    return $queryArgs;
-});
+// Cleanup legacy license data
+function cmb_cleanup_legacy_license_data()
+{
+    // Remove any leftover license-related options
+    delete_option('cmb_license_key');
+    delete_transient('cmb_license_valid');
+}
+register_activation_hook(__FILE__, 'cmb_cleanup_legacy_license_data');
 
 
 
