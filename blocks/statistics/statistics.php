@@ -40,7 +40,7 @@ foreach ($statistics as $index => $stat) {
 }
 ?>
 
-<section class="statistics pb-16 cmt-block <?php echo esc_attr($classes); ?>" <?php echo $id; ?> data-block-name="<?php echo esc_attr($acfKey); ?>">
+<section class="statistics cmt-block <?php echo esc_attr($classes); ?>" <?php echo $id; ?> data-block-name="<?php echo esc_attr($acfKey); ?>">
     <div class="container px-8">
         <?php if ($headline): ?>
             <h2 class="text-center"><?php echo esc_html($headline); ?></h2>

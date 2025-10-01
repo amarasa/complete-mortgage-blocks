@@ -213,7 +213,7 @@ if (!function_exists('vv_admin_badge')) {
     </div>
 <?php endif; ?>
 
-<?php if (!empty($cta['url']) && !empty($cta['title'])) : ?>
+<?php if (!empty($cta['url']) && !empty($cta['title'])) { ?>
     <div class="container px-8">
         <div class="relative">
             <hr class="absolute top-1/2 -translate-y-1/2 w-full" />
@@ -224,6 +224,7 @@ if (!function_exists('vv_admin_badge')) {
             </a>
         </div>
     </div>
-<?php endif; ?>
+    <div class="pb-[15vh]"></div>
+<?php } else { ?>
 
-<div class="pb-[15vh]"></div>
+<?php } ?>
