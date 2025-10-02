@@ -38,36 +38,9 @@ if (!function_exists('vv_image_url')) {
         return '';
     }
 }
-if (!function_exists('vv_fcp_objpos')) {
-    function vv_fcp_objpos($img_or_id)
-    {
-        $image_id = vv_norm_image_id($img_or_id);
-        if ($image_id && function_exists('fcp_get_focalpoint')) {
-            $focus = fcp_get_focalpoint($image_id);
-            if (is_object($focus)) {
-                if (isset($focus->leftPercent, $focus->topPercent)) {
-                    $x = (float)$focus->leftPercent;
-                    $y = (float)$focus->topPercent;
-                } elseif (isset($focus->xPercent, $focus->yPercent)) {
-                    $x = (float)$focus->xPercent;
-                    $y = (float)$focus->yPercent;
-                } elseif (isset($focus->x, $focus->y)) {
-                    $x = (float)$focus->x * 100;
-                    $y = (float)$focus->y * 100;
-                }
-                if (isset($x, $y)) {
-                    $fmt = fn($n) => rtrim(rtrim(number_format($n, 2, '.', ''), '0'), '.');
-                    return $fmt($x) . '% ' . $fmt($y) . '%';
-                }
-            }
-        }
-        return '50% 50%';
-    }
-}
 
 // Background prep
 $bg_url = vv_image_url($background_image);
-$bg_pos = vv_fcp_objpos($background_image);
 ?>
 <span class="bg-lightGrey sr-only border-primary"></span>
 <section class="trusted-by cmt-block relative <?php echo esc_attr($classes); ?> py-16 <?php echo $enable_bg_color ? 'bg-lightGrey' : ''; ?>" <?php echo $id_attr; ?> data-block-name="<?php echo esc_attr($acfKey); ?>">
@@ -78,7 +51,7 @@ $bg_pos = vv_fcp_objpos($background_image);
     linear-gradient(to top, <?php echo $bottom_gradient_overlay; ?>, rgba(0,0,0,0)) bottom;"></div>
         <?php } ?>
         <div class="trusted-by-background-image absolute inset-0"
-            style="background-image:url('<?php echo esc_url($bg_url); ?>');background-size:cover;background-repeat:no-repeat;background-position:<?php echo esc_attr($bg_pos); ?>;">
+            style="background-image:url('<?php echo esc_url($bg_url); ?>');background-size:cover;background-repeat:no-repeat;background-position:center center;">
         </div>
         <div class="trusted-by-background-image-overlay absolute z-10 inset-0"
             style="background: linear-gradient(to bottom, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.4) 100%);">

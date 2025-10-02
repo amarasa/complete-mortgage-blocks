@@ -26,32 +26,6 @@ if (!function_exists('vv_norm_image_id')) {
         return 0;
     }
 }
-if (!function_exists('vv_fcp_objpos')) {
-    // Return "x% y%" from hirasso focal-point-picker; fallback center
-    function vv_fcp_objpos($img_or_id)
-    {
-        $image_id = vv_norm_image_id($img_or_id);
-        if (!$image_id || !function_exists('fcp_get_focalpoint')) return '50% 50%';
-
-        $focus = fcp_get_focalpoint($image_id);
-        if (!is_object($focus)) return '50% 50%';
-
-        if (isset($focus->leftPercent, $focus->topPercent)) {
-            $x = (float)$focus->leftPercent;
-            $y = (float)$focus->topPercent;
-        } elseif (isset($focus->xPercent, $focus->yPercent)) {
-            $x = (float)$focus->xPercent;
-            $y = (float)$focus->yPercent;
-        } elseif (isset($focus->x, $focus->y)) { // 0–1 ratios
-            $x = (float)$focus->x * 100;
-            $y = (float)$focus->y * 100;
-        } else {
-            return '50% 50%';
-        }
-        $fmt = static fn($n) => rtrim(rtrim(number_format($n, 2, '.', ''), '0'), '.');
-        return $fmt($x) . '% ' . $fmt($y) . '%';
-    }
-}
 
 // Pick a random image item
 $random_item = null;
@@ -61,7 +35,6 @@ if (is_array($foreground_image_set) && count($foreground_image_set) > 0) {
 
 $random_img      = $random_item['image'] ?? null; // could be ID/array/URL
 $random_img_id   = vv_norm_image_id($random_img);
-$random_obj_pos  = vv_fcp_objpos($random_img);
 $random_img_alt  = '';
 
 if ($random_img_id) {
@@ -115,17 +88,16 @@ if ($random_img_id) {
                                     'class'   => 'block w-full h-full',
                                     'alt'     => $random_img_alt,
                                     'loading' => 'lazy',
-                                    'style'   => 'object-fit:cover!important;object-position:' . esc_attr($random_obj_pos) . ' !important;width:100%;height:100%;',
+                                    'style'   => 'object-fit:cover!important;object-position:center center !important;width:100%;height:100%;',
                                 ]
                             );
                         } else {
                             // URL fallback
                             $url = is_array($random_img) ? ($random_img['url'] ?? '') : (string)$random_img;
                             printf(
-                                '<img src="%s" alt="%s" class="block w-full h-full" style="object-fit:cover!important;object-position:%s !important;width:100%%;height:100%%;">',
+                                '<img src="%s" alt="%s" class="block w-full h-full" style="object-fit:cover!important;object-position:center center !important;width:100%%;height:100%%;">',
                                 esc_url($url),
-                                esc_attr($headline ?: 'Hero image'),
-                                esc_attr($random_obj_pos)
+                                esc_attr($headline ?: 'Hero image')
                             );
                         }
                         ?>

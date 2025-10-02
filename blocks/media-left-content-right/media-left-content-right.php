@@ -23,33 +23,6 @@ if (!function_exists('vv_norm_image_id')) {
     }
 }
 
-if (!function_exists('vv_fcp_objpos')) {
-    // Return "x% y%" from hirasso focal-point-picker; fallback to center
-    function vv_fcp_objpos($img)
-    {
-        $image_id = vv_norm_image_id($img);
-        if (!$image_id || !function_exists('fcp_get_focalpoint')) return '50% 50%';
-        $focus = fcp_get_focalpoint($image_id);
-        if (!is_object($focus)) return '50% 50%';
-
-        if (isset($focus->leftPercent, $focus->topPercent)) {
-            $x = (float) $focus->leftPercent;
-            $y = (float) $focus->topPercent;
-        } elseif (isset($focus->xPercent, $focus->yPercent)) {
-            $x = (float) $focus->xPercent;
-            $y = (float) $focus->yPercent;
-        } elseif (isset($focus->x, $focus->y)) { // 0–1 ratios
-            $x = (float) $focus->x * 100;
-            $y = (float) $focus->y * 100;
-        } else {
-            return '50% 50%';
-        }
-        $fmt = function ($n) {
-            return rtrim(rtrim(number_format($n, 2, '.', ''), '0'), '.');
-        };
-        return $fmt($x) . '% ' . $fmt($y) . '%';
-    }
-}
 ?>
 
 <section class="media-left-content-right cmt-block <?php echo esc_attr($classes ? ' ' . $classes : ''); ?>" <?php echo $id_attr; ?> data-block-name="<?php echo esc_attr($acfKey); ?>">
@@ -60,7 +33,6 @@ if (!function_exists('vv_fcp_objpos')) {
                 $image_or_video           = get_field('image_or_video'); // truthy => video mode
                 $image_or_video_thumbnail = get_field('image_or_video_thumbnail'); // ACF image (ID/array)
                 $image_id                 = vv_norm_image_id($image_or_video_thumbnail);
-                $obj_pos                  = vv_fcp_objpos($image_or_video_thumbnail);
                 ?>
 
                 <!-- 16:9 aspect box -->
@@ -75,10 +47,7 @@ if (!function_exists('vv_fcp_objpos')) {
                             [
                                 'class'   => 'wp-image-' . $image_id,
                                 'loading' => 'lazy',
-                                'style'   => sprintf(
-                                    'position:absolute;inset:0;width:100%%;height:100%%;display:block;object-fit:cover!important;object-position:%s!important;',
-                                    esc_attr($obj_pos)
-                                ),
+                                'style'   => 'position:absolute;inset:0;width:100%;height:100%;display:block;object-fit:cover!important;object-position:center center!important;',
                             ]
                         );
                     } else {
@@ -102,14 +71,6 @@ if (!function_exists('vv_fcp_objpos')) {
                             </svg>
                         </button>
                     <?php endif; ?>
-
-                    <?php
-                    // Admin badge (handy while dialing in)
-                    if (is_user_logged_in() && current_user_can('manage_options') && $image_id) {
-                        echo '<div style="position:absolute;bottom:.5rem;left:.5rem;z-index:20;background:rgba(0,0,0,.7);color:#fff;padding:.25rem .5rem;font:12px/1.2 monospace;border-radius:.25rem;">'
-                            . 'id=' . esc_html($image_id) . ' | ' . esc_html($obj_pos) . '</div>';
-                    }
-                    ?>
                 </div>
             </div>
 

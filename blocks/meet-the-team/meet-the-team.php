@@ -36,33 +36,6 @@ if (!function_exists('vv_norm_image_id')) {
         return 0;
     }
 }
-if (!function_exists('vv_fcp_objpos')) {
-    // Get "x% y%" from hirasso focal-point-picker; fallback center
-    function vv_fcp_objpos($img_or_id)
-    {
-        $image_id = vv_norm_image_id($img_or_id);
-        if (!$image_id || !function_exists('fcp_get_focalpoint')) return '50% 50%';
-        $focus = fcp_get_focalpoint($image_id);
-        if (!is_object($focus)) return '50% 50%';
-
-        if (isset($focus->leftPercent, $focus->topPercent)) {
-            $x = (float)$focus->leftPercent;
-            $y = (float)$focus->topPercent;
-        } elseif (isset($focus->xPercent, $focus->yPercent)) {
-            $x = (float)$focus->xPercent;
-            $y = (float)$focus->yPercent;
-        } elseif (isset($focus->x, $focus->y)) {
-            $x = (float)$focus->x * 100;
-            $y = (float)$focus->y * 100;
-        } else {
-            return '50% 50%';
-        }
-        $fmt = function ($n) {
-            return rtrim(rtrim(number_format($n, 2, '.', ''), '0'), '.');
-        };
-        return $fmt($x) . '% ' . $fmt($y) . '%';
-    }
-}
 
 // ----- Query args
 $query_args = [
@@ -105,16 +78,16 @@ $team_members = new WP_Query($query_args);
                     // Choose phone if enabled
                     $phone_number = $show_phone ? ($use_phone ? $phone : $cell) : '';
 
-                    // Featured image (ID) and focal point
+                    // Featured image (ID)
                     $thumb_id = get_post_thumbnail_id($loan_officer_id);
-                    $obj_pos  = $thumb_id ? vv_fcp_objpos($thumb_id) : '50% 50%';
+                    // For display purposes (no focal point needed)
                     $alt_text = trim($first_name . ' ' . $last_name);
                 ?>
-                    <div class="w-full sm:w-1/2 md:w-1/4 mb-8">
+                    <div class="w-full lg:w-1/2 lg:w-1/4 mb-8">
                         <?php if ($clickable): ?><a href="<?php echo esc_url(get_permalink($loan_officer_id)); ?>" class="relative block"><?php endif; ?>
 
                             <!-- Aspect-ratio image box (was background; now real <img> with focal control) -->
-                            <div class="w-full relative overflow-hidden <?php echo esc_attr($corners); ?>" style="padding-bottom:90%;">
+                            <div class="w-full relative overflow-hidden pb-[90%] <?php echo esc_attr($corners); ?>">
                                 <?php
                                 if ($thumb_id) {
                                     echo wp_get_attachment_image(
@@ -125,10 +98,7 @@ $team_members = new WP_Query($query_args);
                                             'class'   => 'wp-image-' . $thumb_id,
                                             'alt'     => $alt_text !== '' ? $alt_text : get_the_title($loan_officer_id),
                                             'loading' => 'lazy',
-                                            'style'   => sprintf(
-                                                'position:absolute;inset:0;width:100%%;height:100%%;display:block;object-fit:cover!important;object-position:%s!important;',
-                                                esc_attr($obj_pos)
-                                            ),
+                                            'style'   => 'position:absolute;inset:0;width:100%;height:100%;display:block;object-fit:cover!important;object-position:center top!important;',
                                         ]
                                     );
                                 } else {

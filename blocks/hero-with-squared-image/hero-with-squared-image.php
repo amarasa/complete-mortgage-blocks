@@ -41,36 +41,9 @@ if (!function_exists('vv_image_url')) {
         return '';
     }
 }
-if (!function_exists('vv_fcp_objpos')) {
-    // Get "x% y%" from hirasso focal-point-picker; fallback center
-    function vv_fcp_objpos($img_or_id)
-    {
-        $image_id = vv_norm_image_id($img_or_id);
-        if (!$image_id || !function_exists('fcp_get_focalpoint')) return '50% 50%';
-
-        $focus = fcp_get_focalpoint($image_id);
-        if (!is_object($focus)) return '50% 50%';
-
-        if (isset($focus->leftPercent, $focus->topPercent)) {
-            $x = (float)$focus->leftPercent;
-            $y = (float)$focus->topPercent;
-        } elseif (isset($focus->xPercent, $focus->yPercent)) {
-            $x = (float)$focus->xPercent;
-            $y = (float)$focus->yPercent;
-        } elseif (isset($focus->x, $focus->y)) { // ratios 0–1
-            $x = (float)$focus->x * 100;
-            $y = (float)$focus->y * 100;
-        } else {
-            return '50% 50%';
-        }
-        $fmt = static fn($n) => rtrim(rtrim(number_format($n, 2, '.', ''), '0'), '.');
-        return $fmt($x) . '% ' . $fmt($y) . '%';
-    }
-}
 
 // ----- Background (right half) prep
 $bg_url = vv_image_url($background_image);
-$bg_pos = vv_fcp_objpos($background_image);
 
 // ----- Foreground (random) prep
 $random_item     = (is_array($foreground_image_set) && count($foreground_image_set) > 0)
@@ -79,7 +52,6 @@ $random_item     = (is_array($foreground_image_set) && count($foreground_image_s
 $random_img      = $random_item['image'] ?? null; // could be ID/array/URL
 $random_img_id   = vv_norm_image_id($random_img);
 $random_img_url  = vv_image_url($random_img);
-$random_obj_pos  = vv_fcp_objpos($random_img);
 $has_foreground  = (bool)$random_img_url;
 $random_img_alt  = $random_img_id ? (get_post_meta($random_img_id, '_wp_attachment_image_alt', true) ?: ($headline ?: 'Hero image')) : ($headline ?: 'Hero image');
 ?>
@@ -88,7 +60,7 @@ $random_img_alt  = $random_img_id ? (get_post_meta($random_img_id, '_wp_attachme
     <!-- Right half background (focal-aware) -->
     <?php if ($bg_url): ?>
         <div class="hero-with-squared-image-background hidden lg:block absolute w-1/2 h-full right-0 rounded-bl-[75px]"
-            style="background-image:url('<?php echo esc_url($bg_url); ?>');background-size:cover;background-repeat:no-repeat;background-position:<?php echo esc_attr($bg_pos); ?>;">
+            style="background-image:url('<?php echo esc_url($bg_url); ?>');background-size:cover;background-repeat:no-repeat;background-position:center center;">
         </div>
     <?php endif; ?>
 
@@ -138,15 +110,14 @@ $random_img_alt  = $random_img_id ? (get_post_meta($random_img_id, '_wp_attachme
                                     'class'   => 'block',
                                     'alt'     => $random_img_alt,
                                     'loading' => 'lazy',
-                                    'style'   => 'position:absolute;inset:0;width:100%;height:100%;object-fit:cover!important;object-position:' . esc_attr($random_obj_pos) . ' !important;',
+                                    'style'   => 'position:absolute;inset:0;width:100%;height:100%;object-fit:cover!important;object-position:center center !important;',
                                 ]
                             );
                         } else {
                             printf(
-                                '<img src="%s" alt="%s" class="block" style="position:absolute;inset:0;width:100%%;height:100%%;object-fit:cover!important;object-position:%s !important;">',
+                                '<img src="%s" alt="%s" class="block" style="position:absolute;inset:0;width:100%%;height:100%%;object-fit:cover!important;object-position:center center !important;">',
                                 esc_url($random_img_url),
-                                esc_attr($random_img_alt),
-                                esc_attr($random_obj_pos)
+                                esc_attr($random_img_alt)
                             );
                         }
                         ?>

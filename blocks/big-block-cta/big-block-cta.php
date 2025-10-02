@@ -40,37 +40,9 @@ if (!function_exists('vv_image_url')) {
         return (is_array($img) && !empty($img['url'])) ? $img['url'] : '';
     }
 }
-if (!function_exists('vv_fcp_objpos')) {
-    // Get "x% y%" from hirasso focal-point-picker; fallback to center
-    function vv_fcp_objpos($img)
-    {
-        $image_id = vv_norm_image_id($img);
-        if (!$image_id || !function_exists('fcp_get_focalpoint')) return '50% 50%';
-        $focus = fcp_get_focalpoint($image_id);
-        if (!is_object($focus)) return '50% 50%';
 
-        if (isset($focus->leftPercent, $focus->topPercent)) {
-            $x = (float)$focus->leftPercent;
-            $y = (float)$focus->topPercent;
-        } elseif (isset($focus->xPercent, $focus->yPercent)) {
-            $x = (float)$focus->xPercent;
-            $y = (float)$focus->yPercent;
-        } elseif (isset($focus->x, $focus->y)) { // 0–1 ratios
-            $x = (float)$focus->x * 100;
-            $y = (float)$focus->y * 100;
-        } else {
-            return '50% 50%';
-        }
-        $fmt = function ($n) {
-            return rtrim(rtrim(number_format($n, 2, '.', ''), '0'), '.');
-        };
-        return $fmt($x) . '% ' . $fmt($y) . '%';
-    }
-}
-
-// ----- Background (URL + focal)
+// ----- Background URL
 $bg_url = vv_image_url($optional_image);
-$bg_pos = vv_fcp_objpos($optional_image);
 
 // Section classes
 $section_classes = trim(
@@ -81,12 +53,11 @@ $section_classes = trim(
         . $classes
 );
 
-// Inline background style: full-bleed cover + focal; add min-height so it actually shows
+// Inline background style: full-bleed cover + center position; add min-height so it actually shows
 $bg_style = $bg_url
     ? sprintf(
-        ' style="background-image:url(\'%s\');background-size:cover;background-repeat:no-repeat;background-position:%s;min-height:420px;width:100%%;"',
-        esc_url($bg_url),
-        esc_attr($bg_pos)
+        ' style="background-image:url(\'%s\');background-size:cover;background-repeat:no-repeat;background-position:center center;min-height:420px;width:100%%;"',
+        esc_url($bg_url)
     )
     : '';
 ?>

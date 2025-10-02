@@ -39,40 +39,10 @@ if (!function_exists('vv_image_url')) {
         return (is_array($img) && !empty($img['url'])) ? $img['url'] : '';
     }
 }
-if (!function_exists('vv_fcp_objpos')) {
-    // Get "x% y%" from hirasso focal-point-picker; default center
-    function vv_fcp_objpos($img_or_id)
-    {
-        $image_id = vv_norm_image_id($img_or_id);
-        if (!$image_id || !function_exists('fcp_get_focalpoint')) return '50% 50%';
-
-        $focus = fcp_get_focalpoint($image_id);
-        if (!is_object($focus)) return '50% 50%';
-
-        if (isset($focus->leftPercent, $focus->topPercent)) {
-            $x = (float)$focus->leftPercent;
-            $y = (float)$focus->topPercent;
-        } elseif (isset($focus->xPercent, $focus->yPercent)) {
-            $x = (float)$focus->xPercent;
-            $y = (float)$focus->yPercent;
-        } elseif (isset($focus->x, $focus->y)) { // ratios 0–1
-            $x = (float)$focus->x * 100;
-            $y = (float)$focus->y * 100;
-        } else {
-            return '50% 50%';
-        }
-        $fmt = function ($n) {
-            return rtrim(rtrim(number_format($n, 2, '.', ''), '0'), '.');
-        };
-        return $fmt($x) . '% ' . $fmt($y) . '%';
-    }
-}
 
 // ---------- Fallback image prep (used only when a post has no thumbnail)
 $fallback_id   = vv_norm_image_id($fallback_image);
 $fallback_url  = vv_image_url($fallback_image);
-$fallback_pos  = vv_fcp_objpos($fallback_image);
-
 // ---------- Query args
 $query_args = [
     'post_type'      => 'post',
@@ -106,7 +76,7 @@ $recent_posts = new WP_Query($query_args);
                             <?php
                             $thumb_id = get_post_thumbnail_id(get_the_ID());
                             if ($thumb_id) {
-                                // Featured image with focal point
+                                // Featured image
                                 echo wp_get_attachment_image(
                                     $thumb_id,
                                     'large',
@@ -116,8 +86,8 @@ $recent_posts = new WP_Query($query_args);
                                         'alt'     => the_title_attribute(['echo' => false]),
                                         'loading' => 'lazy',
                                         'style'   => sprintf(
-                                            'object-fit:cover!important;object-position:%s!important;',
-                                            esc_attr(vv_fcp_objpos($thumb_id))
+                                            'object-fit:cover!important;object-position:center center!important;',
+                                            'center center'
                                         ),
                                     ]
                                 );
@@ -133,7 +103,7 @@ $recent_posts = new WP_Query($query_args);
                                             'alt'     => esc_attr__('Fallback Image', 'your-textdomain'),
                                             'loading' => 'lazy',
                                             'style'   => sprintf(
-                                                'object-fit:cover!important;object-position:%s!important;',
+                                                'object-fit:cover!important;object-position:center center!important;',
                                                 esc_attr($fallback_pos)
                                             ),
                                         ]
@@ -141,7 +111,7 @@ $recent_posts = new WP_Query($query_args);
                                 } else {
                                     // URL-only fallback
                                     printf(
-                                        '<img src="%s" alt="%s" class="absolute inset-0 w-full h-full block" style="object-fit:cover!important;object-position:%s!important;">',
+                                        '<img src="%s" alt="%s" class="absolute inset-0 w-full h-full block" style="object-fit:cover!important;object-position:center center!important;">',
                                         esc_url($fallback_url),
                                         esc_attr__('Fallback Image', 'your-textdomain'),
                                         esc_attr($fallback_pos)

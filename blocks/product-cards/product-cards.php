@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Product Cards Block Template (with focal-point background)
+ * Product Cards Block Template
  */
 
 $classes  = '';
@@ -49,70 +49,30 @@ if (!function_exists('vv_image_url')) {
     }
 }
 
-if (!function_exists('vv_fcp_objpos')) {
-    // Return "x% y%" from hirasso focal-point (fallback center)
-    function vv_fcp_objpos($img)
-    {
-        $image_id = vv_norm_image_id($img);
-        if (!$image_id || !function_exists('fcp_get_focalpoint')) return '50% 50%';
-        $focus = fcp_get_focalpoint($image_id);
-        if (!is_object($focus)) return '50% 50%';
-
-        if (isset($focus->leftPercent, $focus->topPercent)) {
-            $x = (float) $focus->leftPercent;
-            $y = (float) $focus->topPercent;
-        } elseif (isset($focus->xPercent, $focus->yPercent)) {
-            $x = (float) $focus->xPercent;
-            $y = (float) $focus->yPercent;
-        } elseif (isset($focus->x, $focus->y)) {
-            $x = (float) $focus->x * 100;
-            $y = (float) $focus->y * 100;
-        } else {
-            return '50% 50%';
-        }
-        $fmt = function ($n) {
-            return rtrim(rtrim(number_format($n, 2, '.', ''), '0'), '.');
-        };
-        return $fmt($x) . '% ' . $fmt($y) . '%';
-    }
-}
 
 // ----- Background (now focal-aware)
 $bg_url  = vv_image_url($bg_image);
-$bg_pos  = vv_fcp_objpos($bg_image);
 $bg_has  = ($bg_url !== '');
 
 $bg_classes = $bg_has ? 'bg-cover' : ''; // drop 'bg-center'; we control via inline style
 $bg_style   = $bg_has
-    ? ' style="background-image:url(' . esc_url($bg_url) . ');background-size:cover;background-repeat:no-repeat;background-position:' . esc_attr($bg_pos) . ';"'
+    ? ' style="background-image:url(' . esc_url($bg_url) . ');background-size:cover;background-repeat:no-repeat;background-position:center center;"'
     : '';
 
 // ----- Loop wrapper classes
 $wrap_classes = 'product-cards-loop';
-if ($count === 4) $wrap_classes .= ' product-cards-loop--4 justify-center lg:justify-between gap-y-8 gap-x-4 flex-wrap lg:flex-nowrap';
-if ($count === 3) $wrap_classes .= ' product-cards-loop--3 gap-8 flex-wrap md:flex-nowrap';
-if ($count === 2) $wrap_classes .= ' product-cards-loop--2 gap-8 flex-wrap md:flex-nowrap';
+if ($count === 4) $wrap_classes .= ' product-cards-loop--4 justify-center lg:justify-between gap-y-8 lg:flex lg:gap-x-4 lg:flex-nowrap';
+if ($count === 3) $wrap_classes .= ' product-cards-loop--3 lg:gap-x-8 lg:flex xl:flex-nowrap';
+if ($count === 2) $wrap_classes .= ' product-cards-loop--2 lg:gap-x-8 lg:flex-nowrap';
 if ($count === 1) $wrap_classes .= ' product-cards-loop--1 justify-center';
 
 // ----- Per-item classes
 $item_classes = 'w-full mb-8';
-if ($count === 4) $item_classes = 'w-full md:w-[calc(50%-2em)] lg:w-1/4 mb-8';
-if ($count === 3) $item_classes = 'w-full md:w-1/3 mb-8';
-if ($count === 2) $item_classes = 'w-full md:w-1/2 lg:w-1/2 mb-8';
+if ($count === 4) $item_classes = 'w-full lg:w-[calc(50%-2em)] lg:w-1/4 mb-8';
+if ($count === 3) $item_classes = 'w-full lg:w-1/3 mb-8';
+if ($count === 2) $item_classes = 'w-full lg:w-1/2 mb-8';
 if ($count === 1) $item_classes = 'w-full lg:w-1/2 mb-8';
 
-/**
- * Optional admin badge (kept – handy while dialing things in)
- */
-if (!function_exists('vv_admin_badge')) {
-    function vv_admin_badge($text)
-    {
-        if (is_user_logged_in() && current_user_can('manage_options')) {
-            echo '<div style="position:absolute;bottom:.5rem;left:.5rem;z-index:60;background:rgba(0,0,0,.7);color:#fff;padding:.25rem .5rem;font:12px/1.2 monospace;border-radius:.25rem;">'
-                . esc_html($text) . '</div>';
-        }
-    }
-}
 ?>
 <span class="sr-only bg-tertiary"></span>
 <span class="sr-only bg-lightGrey"></span>
@@ -126,17 +86,13 @@ if (!function_exists('vv_admin_badge')) {
                                                 } ?>">
                 <?php echo esc_html($headline); ?>
             </h2>
-            <?php
-            // show bg focal position for admins
-            if ($bg_has) vv_admin_badge('bg ' . esc_html($bg_pos));
-            ?>
         </div>
     <?php endif; ?>
 </div>
 
 <?php if ($count > 0) : ?>
     <div class="relative -mt-[30%] lg:-mt-[26%] xl:-mt-[23%]">
-        <div class="max-w-7xl px-8 mt-12 mx-auto flex <?php echo esc_attr($wrap_classes); ?>">
+        <div class="max-w-7xl px-8 mt-12 mx-auto <?php echo esc_attr($wrap_classes); ?>">
             <?php while (have_rows('product_cards')) : the_row(); ?>
                 <?php
                 $link        = get_sub_field('card_link');
@@ -155,14 +111,13 @@ if (!function_exists('vv_admin_badge')) {
                 $close = $has_link ? '</a>' : '</div>';
 
                 $image_id = vv_norm_image_id($image);
-                $obj_pos  = vv_fcp_objpos($image);
                 ?>
                 <div class="<?php echo esc_attr($item_classes); ?>">
                     <?php echo $open; ?>
 
                     <?php if ($image_id) : ?>
                         <!-- Aspect-ratio crop box -->
-                        <div class="relative w-full overflow-hidden" style="padding-bottom:70%;">
+                        <div class="relative w-full overflow-hidden h-[35vh]">
                             <?php
                             // Absolutely-positioned IMG with inline crop styles (beats any CSS override)
                             echo wp_get_attachment_image(
@@ -172,17 +127,13 @@ if (!function_exists('vv_admin_badge')) {
                                 [
                                     'class'   => 'wp-image-' . $image_id,
                                     'loading' => 'lazy',
-                                    'style'   => sprintf(
-                                        'position:absolute;inset:0;width:100%%;height:100%%;display:block;object-fit:cover!important;object-position:%s!important;',
-                                        esc_attr($obj_pos)
-                                    ),
+                                    'style'   => 'position:absolute;inset:0;width:100%;height:100%;display:block;object-fit:cover!important;object-position:center center!important;',
                                 ]
                             );
-                            vv_admin_badge("id={$image_id} | {$obj_pos}");
                             ?>
                         </div>
                     <?php else : ?>
-                        <div class="relative w-full pb-[70%] bg-gray-100"><?php vv_admin_badge('no image_id'); ?></div>
+                        <div class="relative w-full pb-[70%] bg-gray-100"></div>
                     <?php endif; ?>
 
                     <div class="product-card-content border border-solid border-[#c6c6cd] pt-6 px-8 pb-6 bg-white">

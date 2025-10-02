@@ -60,50 +60,19 @@ if (!function_exists('vv_image_url')) {
     }
 }
 
-if (!function_exists('vv_fcp_objpos')) {
-    // Get "x% y%" from hirasso focal-point-picker; fallback to center
-    function vv_fcp_objpos($img)
-    {
-        $image_id = vv_norm_image_id($img);
-        if (!$image_id || !function_exists('fcp_get_focalpoint')) return '50% 50%';
-
-        $focus = fcp_get_focalpoint($image_id);
-        if (!is_object($focus)) return '50% 50%';
-
-        if (isset($focus->leftPercent, $focus->topPercent)) {
-            $x = (float) $focus->leftPercent;
-            $y = (float) $focus->topPercent;
-        } elseif (isset($focus->xPercent, $focus->yPercent)) {
-            $x = (float) $focus->xPercent;
-            $y = (float) $focus->yPercent;
-        } elseif (isset($focus->x, $focus->y)) { // 0–1 ratios
-            $x = (float) $focus->x * 100;
-            $y = (float) $focus->y * 100;
-        } else {
-            return '50% 50%';
-        }
-        $fmt = function ($n) {
-            return rtrim(rtrim(number_format($n, 2, '.', ''), '0'), '.');
-        };
-        return $fmt($x) . '% ' . $fmt($y) . '%';
-    }
-}
 
 // ----- Background (URL + focal)
 $bg_url = vv_image_url($background_image);
-$bg_pos = vv_fcp_objpos($background_image);
-
 // Container classes
 $section_classes = trim('specializations relative ' . ($edge_to_edge ? 'w-full px-0' : 'xl:container') . ' ' . (!$edge_to_edge ? $corners : '') . ' ' . ($extend_container ? 'extend-container' : '') . ' ' . $classes);
 
 // Inline background styles: full-bleed cover + focal
 $bg_style = '';
 if ($bg_url) {
-    // cover, no-repeat, focal position; include min-height so it visibly stretches
+    // cover, no-repeat, center position; include min-height so it visibly stretches
     $bg_style = sprintf(
-        ' style="background-image:url(\'%s\');background-size:cover;background-repeat:no-repeat;background-position:%s;min-height:480px;width:100%%;"',
-        esc_url($bg_url),
-        esc_attr($bg_pos)
+        ' style="background-image:url(\'%s\');background-size:cover;background-repeat:no-repeat;background-position:center center;min-height:480px;width:100%%;"',
+        esc_url($bg_url)
     );
 }
 ?>
@@ -173,12 +142,4 @@ if ($bg_url) {
             <?php endif; ?>
         </div>
     </div>
-
-    <?php
-    // Optional: admin badge showing bg focal pos (helps when dialing in)
-    if (is_user_logged_in() && current_user_can('manage_options') && $bg_url) {
-        echo '<div style="position:absolute;bottom:.5rem;left:.5rem;z-index:40;background:rgba(0,0,0,.6);color:#fff;padding:.25rem .5rem;font:12px/1.2 monospace;border-radius:.25rem;">bg '
-            . esc_html($bg_pos) . '</div>';
-    }
-    ?>
 </section>

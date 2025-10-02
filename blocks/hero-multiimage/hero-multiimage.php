@@ -28,33 +28,9 @@ if (!function_exists('vv_norm_image_id')) {
         return 0;
     }
 }
-if (!function_exists('vv_fcp_objpos')) {
-    // Get "x% y%" from hirasso focal-point; fallback center
-    function vv_fcp_objpos($img_or_id)
-    {
-        $image_id = vv_norm_image_id($img_or_id);
-        if (!$image_id || !function_exists('fcp_get_focalpoint')) return '50% 50%';
-        $focus = fcp_get_focalpoint($image_id);
-        if (!is_object($focus)) return '50% 50%';
-        if (isset($focus->leftPercent, $focus->topPercent)) {
-            $x = (float)$focus->leftPercent;
-            $y = (float)$focus->topPercent;
-        } elseif (isset($focus->xPercent, $focus->yPercent)) {
-            $x = (float)$focus->xPercent;
-            $y = (float)$focus->yPercent;
-        } elseif (isset($focus->x, $focus->y)) {
-            $x = (float)$focus->x * 100;
-            $y = (float)$focus->y * 100;
-        } else {
-            return '50% 50%';
-        }
-        $fmt = fn($n) => rtrim(rtrim(number_format($n, 2, '.', ''), '0'), '.');
-        return $fmt($x) . '% ' . $fmt($y) . '%';
-    }
-}
 
 /**
- * Render one image box with focal-aware <img>.
+ * Render one image box with <img>.
  * $item expects ['image' => (ACF image array|ID|string URL)]
  * $box_classes are your sizing wrappers (width/height/mb etc.)
  */
@@ -64,11 +40,9 @@ if (!function_exists('vv_render_focal_box')) {
         $img      = $item['image'] ?? null;
         $img_id   = vv_norm_image_id($img);
         $alt      = '';
-        $obj_pos  = '50% 50%';
 
         if ($img_id) {
             $alt     = get_post_meta($img_id, '_wp_attachment_image_alt', true) ?: '';
-            $obj_pos = vv_fcp_objpos($img_id);
         }
 
         echo '<div class="overflow-hidden ' . esc_attr($cornerClass) . ' shadow-lg ' . esc_attr($box_classes) . '">';
@@ -81,17 +55,16 @@ if (!function_exists('vv_render_focal_box')) {
                     'class'   => 'object-cover w-full h-full block',
                     'alt'     => $alt,
                     'loading' => 'lazy',
-                    'style'   => 'object-position:' . esc_attr($obj_pos) . ' !important;',
+                    'style'   => 'object-position:center center !important;',
                 ]
             );
         } else {
-            // URL fallback (no srcset, still focal-center)
+            // URL fallback (no srcset, center positioned)
             $url = is_array($img) ? ($img['url'] ?? '') : (string)$img;
             printf(
-                '<img src="%s" alt="%s" class="object-cover w-full h-full block" style="object-position:%s !important;">',
+                '<img src="%s" alt="%s" class="object-cover w-full h-full block" style="object-position:center center !important;">',
                 esc_url($url),
-                esc_attr($alt),
-                esc_attr($obj_pos)
+                esc_attr($alt)
             );
         }
         echo '</div>';

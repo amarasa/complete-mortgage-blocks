@@ -46,76 +46,23 @@ if (!function_exists('vv_image_url')) {
         return '';
     }
 }
-if (!function_exists('vv_fcp_objpos')) {
-    // Read hirasso focal point from attachment; fallback to center
-    function vv_fcp_objpos($img_or_id, $fallback_fp = null)
-    {
-        $image_id = vv_norm_image_id($img_or_id);
-        if ($image_id && function_exists('fcp_get_focalpoint')) {
-            $focus = fcp_get_focalpoint($image_id);
-            if (is_object($focus)) {
-                if (isset($focus->leftPercent, $focus->topPercent)) {
-                    $x = (float)$focus->leftPercent;
-                    $y = (float)$focus->topPercent;
-                } elseif (isset($focus->xPercent, $focus->yPercent)) {
-                    $x = (float)$focus->xPercent;
-                    $y = (float)$focus->yPercent;
-                } elseif (isset($focus->x, $focus->y)) {
-                    $x = (float)$focus->x * 100;
-                    $y = (float)$focus->y * 100;
-                }
-                if (isset($x, $y)) {
-                    $fmt = static fn($n) => rtrim(rtrim(number_format($n, 2, '.', ''), '0'), '.');
-                    return $fmt($x) . '% ' . $fmt($y) . '%';
-                }
-            }
-        }
-
-        // Fallback: accept row/image-provided focal arrays (x/y 0..1 or left/top %)
-        if (is_array($fallback_fp)) {
-            if (isset($fallback_fp['x'], $fallback_fp['y'])) {
-                $x = max(0, min(100, (float)$fallback_fp['x'] * 100));
-                $y = max(0, min(100, (float)$fallback_fp['y'] * 100));
-                $fmt = static fn($n) => rtrim(rtrim(number_format($n, 2, '.', ''), '0'), '.');
-                return $fmt($x) . '% ' . $fmt($y) . '%';
-            }
-            if (isset($fallback_fp['left']) || isset($fallback_fp['top'])) {
-                $x = isset($fallback_fp['left']) ? (float)$fallback_fp['left'] : 50;
-                $y = isset($fallback_fp['top'])  ? (float)$fallback_fp['top']  : 50;
-                $fmt = static fn($n) => rtrim(rtrim(number_format($n, 2, '.', ''), '0'), '.');
-                return $fmt($x) . '% ' . $fmt($y) . '%';
-            }
-        }
-
-        return '50% 50%';
-    }
-}
 
 // ----------------- Pick a random background row -----------------
 $bg_url  = '';
-$bg_pos  = '50% 50%';
 
 if (!empty($bg_rows) && is_array($bg_rows)) {
     $row = $bg_rows[array_rand($bg_rows)];
 
-    // The row is expected to have 'image' and optionally 'focal_point'
+    // Get the image URL from the row
     $image_field = $row['image'] ?? null;
     $bg_url      = vv_image_url($image_field);
-
-    // Try row-level focal; also allow focal on the image array if present
-    $row_fp   = $row['focal_point'] ?? null;
-    if (!$row_fp && is_array($image_field) && !empty($image_field['focal_point'])) {
-        $row_fp = $image_field['focal_point'];
-    }
-
-    $bg_pos = vv_fcp_objpos($image_field, $row_fp);
 }
 ?>
 <?php if ($bg_url): ?>
     <style>
         .hero-full-width {
             background-image: url('<?php echo esc_url($bg_url); ?>');
-            background-position: <?php echo esc_attr($bg_pos); ?>;
+            background-position: center center;
             background-repeat: no-repeat;
             background-size: cover;
         }

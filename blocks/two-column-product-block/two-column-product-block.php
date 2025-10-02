@@ -30,36 +30,8 @@ if (!function_exists('vv_norm_image_id')) {
         return 0;
     }
 }
-if (!function_exists('vv_fcp_objpos')) {
-    // Return "x% y%" from hirasso focal-point-picker; fallback to center
-    function vv_fcp_objpos($img)
-    {
-        $image_id = vv_norm_image_id($img);
-        if (!$image_id || !function_exists('fcp_get_focalpoint')) return '50% 50%';
-        $focus = fcp_get_focalpoint($image_id);
-        if (!is_object($focus)) return '50% 50%';
-
-        if (isset($focus->leftPercent, $focus->topPercent)) {
-            $x = (float)$focus->leftPercent;
-            $y = (float)$focus->topPercent;
-        } elseif (isset($focus->xPercent, $focus->yPercent)) {
-            $x = (float)$focus->xPercent;
-            $y = (float)$focus->yPercent;
-        } elseif (isset($focus->x, $focus->y)) {
-            $x = (float)$focus->x * 100;
-            $y = (float)$focus->y * 100;
-        } else {
-            return '50% 50%';
-        }
-        $fmt = function ($n) {
-            return rtrim(rtrim(number_format($n, 2, '.', ''), '0'), '.');
-        };
-        return $fmt($x) . '% ' . $fmt($y) . '%';
-    }
-}
 
 $image_id   = vv_norm_image_id($image);
-$obj_pos    = vv_fcp_objpos($image);
 $img_alt    = is_array($image) && !empty($image['alt']) ? $image['alt'] : ($headline ?: 'Image');
 ?>
 <section class="two-column-product-block cmt-block <?php echo $classes ? ' ' . esc_attr($classes) : ''; ?>" <?php echo $id_attr; ?> data-block-name="<?php echo esc_attr($acfKey); ?>">
@@ -80,7 +52,7 @@ $img_alt    = is_array($image) && !empty($image['alt']) ? $image['alt'] : ($head
                                 'alt'     => esc_attr($img_alt),
                                 'loading' => 'lazy',
                                 'style'   => sprintf(
-                                    'position:absolute;inset:0;width:100%%;height:100%%;display:block;object-fit:cover!important;object-position:%s!important;',
+                                    'position:absolute;inset:0;width:100%%;height:100%%;display:block;object-fit:cover!important;object-position:center center!important;',
                                     esc_attr($obj_pos)
                                 ),
                             ]
