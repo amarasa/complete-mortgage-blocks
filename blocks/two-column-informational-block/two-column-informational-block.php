@@ -33,7 +33,7 @@ if (!empty($block['anchor'])) {
             </div>
             <div class="col-span-12 md:col-span-6">
                 <?php if ($sub_headline) { ?>
-                    <h3 class="mt-0 mb-5 font-bold"><?php echo esc_html($sub_headline); ?></h3>
+                    <p class="text-primary mt-0 mb-5 font-bold"><?php echo esc_html($sub_headline); ?></p>
                 <?php } ?>
 
                 <?php if (!empty($informational_list)): ?>
