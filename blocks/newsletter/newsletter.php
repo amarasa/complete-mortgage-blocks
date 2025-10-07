@@ -17,7 +17,7 @@ $newsletter_form = get_field('form');
 <section class="newsletter<?php echo esc_attr($classes); ?> bg-[#eee] pt-12 pb-16" <?php echo $id; ?> data-block-name="<?php echo $acfKey; ?>">
     <div class="container px-8">
         <?php if ($headline): ?>
-            <h2 class="mb-5"><?php echo esc_html($headline); ?></h2>
+            <h2><?php echo esc_html($headline); ?></h2>
         <?php endif; ?>
         <?php if (!empty($newsletter_form)): ?>
             <div class="newsletter-form">

@@ -16,23 +16,41 @@ $headline = get_field('headline');
 $introduction_text = get_field('introduction_text');
 $buttons = get_field('buttons');
 $below_button_text = get_field('below_button_text');
-$background_image = get_field('background_image');
-$background_image_src = wp_get_attachment_image_src($background_image['id'], 'large');
+$background_images = get_field('background_images');
 $turn_on_overlay = get_field('turn_on_overlay');
 $top_gradient_overlay = get_field('top_gradient_overlay');
 $bottom_gradient_overlay = get_field('bottom_gradient_overlay');
 ?>
-<?php if ($background_image) { ?>
-    <style>
-        .hero-full-width {
-            background-image: url(<?php echo $background_image_src[0]; ?>);
-            background-position: <?php echo esc_attr($background_image['left']) . '% ' . esc_attr($background_image['top']); ?>%;
+<?php if (have_rows('background_images')) {
+    // Get all background images from the repeater
+    $background_images_array = [];
+    while (have_rows('background_images')) {
+        the_row();
+        $background_image = get_sub_field('background_image');
+        if ($background_image) {
+            $background_images_array[] = $background_image;
         }
-    </style>
-<?php } ?>
-<section class="hero-full-width relative bg-cover w-full h-full <?php echo esc_attr($classes); ?>" <?php echo $id; ?> data-block-name="<?php echo esc_attr($acfKey); ?>">
-    <div class="hero-full-width-overlay z-10 opacity-70 absolute h-full w-full" style="background: linear-gradient(to bottom,  <?php echo esc_attr($top_gradient_overlay); ?> 0%,<?php echo esc_attr($bottom_gradient_overlay); ?> 100%);">
-    </div>
+    }
+
+    // Randomly select one background image
+    if (!empty($background_images_array)) {
+        $random_image = $background_images_array[array_rand($background_images_array)];
+?>
+        <style>
+            .hero-full-width-<?php echo esc_attr($acfKey); ?> {
+                background-image: url(<?php echo esc_url($random_image['sizes']['large'] ?? $random_image['url']); ?>);
+                background-position: center;
+                background-size: cover;
+            }
+        </style>
+<?php
+    }
+} ?>
+<section class="hero-full-width hero-full-width-<?php echo esc_attr($acfKey); ?> bg-primary relative bg-cover w-full h-full <?php echo esc_attr($classes); ?>" <?php echo $id; ?> data-block-name="<?php echo esc_attr($acfKey); ?>">
+    <?php if ($turn_on_overlay) { ?>
+        <div class="hero-full-width-overlay z-10 opacity-70 absolute h-full w-full" style="background: linear-gradient(to bottom,  <?php echo esc_attr($top_gradient_overlay); ?> 0%,<?php echo esc_attr($bottom_gradient_overlay); ?> 100%);">
+        </div>
+    <?php } ?>
     <div class="hero-full-width-content relative px-8 z-20 text-white mx-auto text-center max-w-3xl py-16 lg:pt-[130px] lg:pb-[105px]">
 
         <h1 class="text-white"><?php echo esc_html($headline); ?></h1>

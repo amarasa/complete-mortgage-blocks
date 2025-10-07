@@ -35,7 +35,7 @@ if (!empty($block['anchor'])) {
         <div class="big-block-cta-image-overlay absolute inset-0 bg-black/50"></div>
     <?php endif; ?>
     <div class="big-block-cta-content relative z-20">
-        <h2 class="text-3xl font-bold text-white"><?php echo esc_html($headline); ?></h2>
+        <h2 class="font-bold text-white"><?php echo esc_html($headline); ?></h2>
 
         <?php if ($cta_content): ?>
             <p class="text-lg mt-4 max-w-[600px] mx-auto"><?php echo esc_html($cta_content); ?></p>

@@ -20,13 +20,13 @@ if (!empty($block['anchor'])) {
 <section class="hyper-local-seo py-10 <?php echo esc_attr($classes); ?>" <?php echo $id; ?> data-block-name="<?php echo $acfKey; ?>">
     <div class="container px-8">
         <?php if ($headline): ?>
-            <h2 class="text-3xl font-bold text-center mb-8"><?php echo esc_html($headline); ?></h2>
+            <h2 class="font-bold text-center mb-8"><?php echo esc_html($headline); ?></h2>
         <?php endif; ?>
 
         <?php if (!empty($list)): ?>
-            <div class="grid grid-cols-12 gap-x-8">
+            <div class="md:flex md:flex-wrap md:gap-x-4 justify-center text-center">
                 <?php foreach ($list as $item): ?>
-                    <div class="col-span-12 md:col-span-6 lg:col-span-4 mb-4">
+                    <div class="mb-4 w-full sm:w-1/3 md:w-1/5 mx-auto">
                         <?php if ($use_hyperlinks && !empty($item['link_item'])): ?>
                             <a href="<?php echo esc_url($item['link_item']['url']); ?>" target="<?php echo esc_attr($item['link_item']['target'] ?: '_self'); ?>" class="text-secondary !text-2xl font-bold hover:text-primary duration-300 ease-in-out transition-all !no-underline">
                                 <?php echo esc_html($item['link_item']['title']); ?>

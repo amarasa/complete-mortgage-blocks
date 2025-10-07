@@ -77,4 +77,5 @@ if (!empty($block['anchor'])) {
                 <?php endif; ?>
             </div>
         </div>
+    </div>
 </section>

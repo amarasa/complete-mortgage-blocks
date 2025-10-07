@@ -84,4 +84,5 @@ if (!empty($block['anchor'])) {
     </div>
 <?php endif; ?>
 </div>
+</div>
 </section>
