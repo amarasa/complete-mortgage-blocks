@@ -66,8 +66,8 @@ $team_members = new WP_Query($query_args);
                     // Determine which phone to use if display_phone is enabled
                     $phone_number = ($show_phone) ? ($use_phone ? $phone : $cell) : '';
                 ?>
-                    <div class="md:w-1/3 lg:w-[20%] mb-8">
-                        <!-- Profile Image Container with corner classes from additional_settings --><?php if ($clickable): ?><a href="<?php echo esc_url($profile_url); ?>" class="relative"><?php endif; ?>
+                    <div class="md:w-1/3 lg:w-[20%] mb-12">
+                        <?php if ($clickable): ?><a href="<?php echo esc_url($profile_url); ?>" class="relative"><?php endif; ?>
                             <div class="w-full relative pb-[90%] !bg-cover <?php echo esc_attr($corners); ?>" style="background:url(<?php echo esc_url($image); ?>);">
                                 <div class="bg-black absolute top-0 right-0 bottom-0 left-0 <?php echo esc_attr($corners); ?> opacity-0 hover:opacity-40 transition-all duration-300 ease-in-out"></div>
                                 <img src="<?php echo esc_url($image); ?>"
@@ -78,7 +78,7 @@ $team_members = new WP_Query($query_args);
                             </a><?php endif; ?>
 
                         <!-- Name -->
-                        <h3 class="mt-2 text-xl font-bold">
+                        <h3 class="text-xl font-bold mt-2 !mb-3">
                             <?php if ($clickable): ?>
                                 <a href="<?php echo esc_url($profile_url); ?>" class="!no-underline text-secondary hover:text-primary">
                                     <?php echo esc_html($show_full_name ? "$first_name $last_name" : $first_name); ?>

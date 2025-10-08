@@ -43,14 +43,12 @@ if (!empty($block['anchor'])) {
                     <?php endif; ?>
                 </div>
 
-                <!-- Right Column (Partial Row Items) -->
-
                 <?php if (!empty($partial_row_list)): ?>
                     <div class="col-span-12 lg:col-span-8">
                         <div class="grid grid-cols-12 lg:gap-x-8">
                             <?php foreach ($partial_row_list as $item): ?>
-                                <div class="col-span-12 md:col-span-6 mb-8">
-                                    <div class="w-12 h-12 items-center justify-center bg-primary rounded-full text-2xl mb-2 relative">
+                                <div class="col-span-12 md:col-span-6 mb-12">
+                                    <div class="w-12 h-12 items-center justify-center bg-primary rounded-full text-2xl mb-4 relative">
                                         <i class="<?php echo esc_attr($item['icon']); ?> text-white top-1/2 left-1/2 absolute -translate-y-1/2 -translate-x-1/2"></i>
                                     </div>
                                     <div>
@@ -69,7 +67,7 @@ if (!empty($block['anchor'])) {
 
                 <?php if (!empty($full_row_list)): ?>
                     <?php foreach ($full_row_list as $item): ?>
-                        <div class="col-span-12 md:col-span-6 lg:col-span-4 gap-x-8 mb-8">
+                        <div class="col-span-12 md:col-span-6 lg:col-span-4 gap-x-8 mb-12">
                             <div class="w-12 h-12 items-center justify-center bg-primary rounded-full text-2xl mb-2 relative">
                                 <i class="<?php echo esc_attr($item['icon']); ?> text-white top-1/2 left-1/2 absolute -translate-y-1/2 -translate-x-1/2"></i>
                             </div>

@@ -45,7 +45,7 @@ if (!empty($foreground_image_set)) {
 } ?>
 <section class="hero-with-squared-image relative lg:h-[575px] xl:h-[700px] w-full <?php echo esc_attr($classes); ?>" <?php echo $id; ?> data-block-name="<?php echo esc_attr($acfKey); ?>">
     <div class="hero-with-squared-image-background hidden lg:block absolute w-1/2 h-full right-0 bg-cover rounded-bl-[75px]" style="background-image: url('<?php echo esc_url($background_image); ?>');"></div>
-    <div class="max-w-[1400px] mx-auto h-full px-8 lg:absolute w-full left-0 right-0 bottom-0 z-10 pt-[5%]">
+    <div class="max-w-[1400px] mx-auto h-full px-8 lg:absolute w-full left-0 right-0 bottom-0 z-10 lg:pt-[5%]">
         <div class="grid grid-cols-12 lg:gap-x-24 items-center">
             <div class="col-span-12 lg:col-span-5">
                 <h1><?= esc_html($headline); ?></h1>

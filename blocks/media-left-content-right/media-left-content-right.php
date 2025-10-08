@@ -15,12 +15,12 @@ if (!empty($block['anchor'])) {
 <section class="media-left-content-right <?php echo esc_attr($classes); ?>" <?php echo $id; ?> data-block-name="<?php echo $acfKey; ?>">
     <div class="container px-8">
         <div class="grid grid-cols-12 md:gap-x-8">
-            <div class="col-span-12 md:col-span-6 lg:col-span-7 mb-3 md:mb-0 ">
+            <div class="col-span-12 md:col-span-6 lg:col-span-7 mb-6 md:mb-0 ">
                 <?php $image_or_video = get_field('image_or_video');
                 $image_or_video_thumbnail = get_field('image_or_video_thumbnail'); ?>
                 <?php if ($image_or_video) { ?>
                     <div class="video relative pb-[56%] w-full bg-cover bg-center" style="background-image: url(<?php echo $image_or_video_thumbnail['url']; ?>);">
-                        <div class="js-modal-btn cursor-pointer transition-all duration-300 ease-in-out hover:opacity-70 top-1/2 left-1/2 absolute -translate-x-1/2 -translate-y-1/2" data-video-id="<?php echo get_field('youtube_video_id'); ?>">
+                        <div class="js-modal-btn cursor-pointer transition-all mb-8 duration-300 ease-in-out hover:opacity-70 top-1/2 left-1/2 absolute -translate-x-1/2 -translate-y-1/2" data-video-id="<?php echo get_field('youtube_video_id'); ?>">
                             <div class="sr-only">Open Video</div>
                             <svg width="73" height="51" viewBox="0 0 73 51" xmlns="http://www.w3.org/2000/svg">
                                 <g fill="none" fill-rule="evenodd">
@@ -32,12 +32,12 @@ if (!empty($block['anchor'])) {
                         </div>
                     </div>
                 <?php } else { ?>
-                    <div class="image pb-[56%] w-full bg-cover bg-center" style="background: url(<?php echo $image_or_video_thumbnail['url']; ?>);"></div>
+                    <div class="image mb-8 pb-[56%] w-full bg-cover bg-center" style="background: url(<?php echo $image_or_video_thumbnail['url']; ?>);"></div>
                 <?php } ?>
             </div>
             <div class="col-span-12 md:col-span-6 lg:col-span-5">
-                <div class="eyebrow-headline text-base uppercase tracking-wide mb-[6px] text-[#063586] font-semibold"><?php echo get_field('eyebrow_headline'); ?></div>
-                <h2><?php echo get_field('headline'); ?></h2>
+                <div class="eyebrow-headline text-base uppercase tracking-wide !mb-4 text-[#063586] font-semibold"><?php echo get_field('eyebrow_headline'); ?></div>
+                <h2 class="mt-0"><?php echo get_field('headline'); ?></h2>
                 <div class="text-base mb-6"><?php echo get_field('description'); ?></div>
                 <?php $button = get_field('button'); ?>
                 <?php if ($button) { ?>

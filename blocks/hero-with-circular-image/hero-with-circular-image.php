@@ -45,18 +45,18 @@ if (!empty($block['anchor'])) {
             }
         </style>
     <?php endif; ?>
-    <div class="container px-8 my-10">
+    <div class="container px-8 md:my-10">
         <div class="grid grid-cols-12 lg:gap-x-24 items-center">
             <div class="col-span-12 lg:col-span-5">
                 <h1><?= esc_html($headline); ?></h1>
                 <p><?= wp_kses_post($introduction_text); ?></p>
 
                 <?php if ($buttons): ?>
-                    <div class="flex gap-x-4 flex-wrap">
+                    <div class="flex lg:gap-x-4 flex-wrap">
                         <?php foreach ($buttons as $button): ?>
                             <?php if (!empty($button['button'])): ?>
                                 <div class="flex-grow">
-                                    <a class="button !no-underline !text-white !w-full text-center" href="<?= esc_url($button['button']['url']); ?>" target="<?= esc_attr($button['button']['target']); ?>">
+                                    <a class="mb-4 button !no-underline !text-white !w-full text-center" href="<?= esc_url($button['button']['url']); ?>" target="<?= esc_attr($button['button']['target']); ?>">
                                         <?= esc_html($button['button']['title']); ?>
                                     </a>
                                 </div>
@@ -65,13 +65,12 @@ if (!empty($block['anchor'])) {
                     </div>
                 <?php endif; ?>
 
-                <p>
                 <p><?= wp_kses_post($below_button_text); ?></p>
-                </p>
+
             </div>
             <div class="col-span-12 lg:col-span-6">
                 <?php if ($random_foreground_image_url): ?>
-                    <div class="random-foreground-image w-[300px] h-[300px] md:w-[500px] md:h-[500px] rounded-full mx-auto"></div>
+                    <div class="random-foreground-image w-[250px] h-[250px] md:w-[500px] md:h-[500px] rounded-full mx-auto"></div>
                 <?php else: ?>
                     <p>No foreground images available.</p>
                 <?php endif; ?>

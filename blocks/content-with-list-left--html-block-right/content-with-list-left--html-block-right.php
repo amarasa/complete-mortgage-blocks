@@ -26,9 +26,9 @@ $html_content = get_field('html_content');
         height: 20px;
     }
 </style>
-<section class="content-with-list-left--html-block-right<?php echo esc_attr($classes); ?> py-20" <?php echo $id; ?> data-block-name="<?php echo $acfKey; ?>">
+<section class="content-with-list-left--html-block-right<?php echo esc_attr($classes); ?>" <?php echo $id; ?> data-block-name="<?php echo $acfKey; ?>">
     <div class="container px-8">
-        <div class="grid grid-cols-12 items-center gap-x-8">
+        <div class="grid grid-cols-12 items-center md:gap-x-8">
             <div class="col-span-12 lg:col-span-6 mb-4">
                 <?php if ($headline) { ?>
                     <h2><?php echo $headline; ?></h2>

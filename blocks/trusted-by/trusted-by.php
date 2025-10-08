@@ -14,7 +14,7 @@ $top_gradient_overlay = get_field('top_gradient_overlay');
 $bottom_gradient_overlay = get_field('bottom_gradient_overlay');
 ?>
 <span class="bg-grey sr-only border-primary"></span>
-<section class="trusted-by cmt-block relative px-8 <?php echo esc_attr($classes); ?> pt-8 pb-16 <?php echo $enable_bg_color ? 'bg-grey' : ''; ?>" <?php echo $id_attr; ?> data-block-name="<?php echo esc_attr($acfKey); ?>">
+<section class="trusted-by cmt-block relative px-8 <?php echo esc_attr($classes); ?> pt-12 pb-16 <?php echo $enable_bg_color ? 'bg-grey' : ''; ?>" <?php echo $id_attr; ?> data-block-name="<?php echo esc_attr($acfKey); ?>">
     <?php if ($bg_url) { ?>
         <?php if (get_field('enable_background_image_with_gradient')) { ?>
             <div class="trusted-by-gradient-background absolute z-20 h-full w-full left-0 top-0" style="background:

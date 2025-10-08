@@ -23,7 +23,7 @@ $cornerClass = $rounded_image_corners ? 'rounded-md' : '';
 ?>
 
 <section class="multiimage-hero relative w-full pb-16 <?php echo esc_attr($classes); ?>" <?php echo $id; ?> data-block-name="<?php echo esc_attr($acfKey); ?>">
-    <div class="max-w-[1300px] mx-auto px-8 py-12">
+    <div class="max-w-[1300px] mx-auto px-8">
         <div class="grid grid-cols-12 lg:gap-x-20 items-center">
             <!-- Left Content -->
             <div class="col-span-12 lg:col-span-5">

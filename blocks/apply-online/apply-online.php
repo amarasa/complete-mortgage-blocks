@@ -35,7 +35,7 @@ if (!empty($block['anchor'])) {
                     </div>
                 <?php endif; ?>
             </div>
-            <div class="col-span-12 md:col-span-6 lg:col-span-5">
+            <div class="col-span-12 md:col-span-6 lg:col-span-5 mt-8 md:mt-0">
                 <?php if (!empty($lead_path_entry_headline)): ?>
                     <h3><?php echo wp_kses_post($lead_path_entry_headline); ?></h3>
                 <?php endif; ?>

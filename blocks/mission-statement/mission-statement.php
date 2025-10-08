@@ -32,12 +32,12 @@ $buttons = get_field('buttons');
             </div>
         <?php } ?>
         <?php if ($buttons) { ?>
-            <div class="flex gap-x-4 justify-center">
+            <div class="md:flex mg:gap-x-4 justify-center">
                 <?php
                 while (have_rows('buttons')) : the_row();
                 ?>
                     <?php $button = get_sub_field('button'); ?>
-                    <a href="<?php echo $button['url']; ?>" class="button !no-underline !text-white"><?php echo $button['title']; ?></a>
+                    <a href="<?php echo $button['url']; ?>" class="button mb-4 !no-underline !text-white"><?php echo $button['title']; ?></a>
                 <?php endwhile; ?>
             </div>
         <?php } ?>
