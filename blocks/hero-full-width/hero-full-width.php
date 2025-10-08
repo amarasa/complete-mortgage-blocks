@@ -38,7 +38,7 @@ $bottom_gradient_overlay = get_field('bottom_gradient_overlay');
 ?>
         <style>
             .hero-full-width-<?php echo esc_attr($acfKey); ?> {
-                background-image: url(<?php echo esc_url($random_image['sizes']['large'] ?? $random_image['url']); ?>);
+                background-image: url(<?php echo esc_url($random_image['sizes']['full'] ?? $random_image['url']); ?>);
                 background-position: center;
                 background-size: cover;
             }

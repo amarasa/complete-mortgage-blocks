@@ -3,21 +3,19 @@ $classes    = '';
 $id         = '';
 $acfKey     = 'group_67c9ba97ad294';
 
-// Get ACF fields
-$display_style    = get_field('display_style'); // True: One-column, False: Two-column
-$background_color = get_field('background_color') ?: '';
-$headline         = get_field('headline') ?: '';
-$description      = get_field('description') ?: '';
-$list_items       = get_field('list_items') ?: [];
-$left_cta         = get_field('optional_buttonleft_column_cta_button');
-$right_cta        = get_field('right_column_cta_button');
-$background_switch = get_field('background_color_switch'); // true/false
-$extra_spacing    = get_field('extra_spacing'); // true/false
+$display_style = get_field('display_style');
+$background_color = get_field('background_color');
+$headline = get_field('headline');
+$description = get_field('description');
+$list_items = get_field('list_items');
+$left_cta = get_field('optional_buttonleft_column_cta_button');
+$right_cta = get_field('right_column_cta_button');
+$background_switch = get_field('background_color_switch');
+$extra_spacing = get_field('extra_spacing');
 $sub_headline = get_field('sub_headline');
 $list_type = get_field('list_type');
 $display_numbers = get_field('numbers_displsy');
 
-// Append additional classes and id from block if provided
 if (!empty($block['className'])) {
     $classes .= ' ' . $block['className'];
 }
@@ -27,13 +25,11 @@ if (!empty($block['anchor'])) {
 
 $space = $extra_spacing ? 'pb-40' : 'pb-20';
 
-// Consolidate classes for the section
 $section_classes = "how-it-works pt-20 $space $classes";
 if (!$background_switch) {
     $section_classes .= " text-white bg-primary";
 }
 
-// Common classes for headline, icons, and buttons
 $headline_class = !$background_switch ? 'text-white' : '';
 $icon_class     = !$background_switch ? 'bg-white text-primary' : 'bg-primary text-white';
 $button_class   = !$background_switch ? 'button-white !no-underline' : '';
@@ -42,15 +38,15 @@ $button_class   = !$background_switch ? 'button-white !no-underline' : '';
     <div class="container px-8">
         <?php if ($display_style): ?>
             <?php if ($headline): ?>
-                <h2 class="max-w-lg mx-auto text-center mb-8 <?php echo esc_attr($headline_class); ?>">
+                <h2 class="max-w-lg mx-auto text-center mt-0 mb-8 <?php echo esc_attr($headline_class); ?>">
                     <?php echo esc_html($headline); ?>
                 </h2>
             <?php endif; ?>
 
             <?php if ($description): ?>
-                <p class="max-w-[1024px] mx-auto text-center mb-16">
-                    <?php echo esc_html($description); ?>
-                </p>
+                <div class="max-w-[1024px] mx-auto text-center mb-16">
+                    <?php echo $description; ?>
+                </div>
             <?php endif; ?>
 
             <!-- One Column Layout -->
@@ -87,7 +83,7 @@ $button_class   = !$background_switch ? 'button-white !no-underline' : '';
                 <div class="col-span-12 lg:col-span-5 mb-12 lg:mb-0">
                     <h2 class="<?php echo $headline_class; ?>"><?php echo esc_html($headline); ?></h2>
 
-                    <p class="mb-8"><?php echo esc_html($description); ?></p>
+                    <div class="mb-8"><?php echo $description; ?></div>
 
                     <?php if ($left_cta): ?>
                         <a href="<?php echo esc_url($left_cta['url']); ?>" class="button <?php echo esc_attr($button_class); ?>" target="<?php echo esc_attr($left_cta['target'] ?: '_self'); ?>">
