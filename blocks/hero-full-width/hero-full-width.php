@@ -69,6 +69,6 @@ $bottom_gradient_overlay = get_field('bottom_gradient_overlay');
             </div>
         <?php endif; ?>
 
-        <p><?php echo wp_kses_post(str_replace('<a ', '<a class="!no-underline !text-white hover:!text-secondary" ', $below_button_text)); ?></p>
+        <p><?php echo wp_kses_post(str_replace('<a ', '<a class="!no-underline !text-white hover:!opacity-60" ', $below_button_text)); ?></p>
     </div>
 </section>

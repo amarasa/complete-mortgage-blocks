@@ -59,8 +59,14 @@ $recent_posts = new WP_Query($query_args);
 ?>
 
 <section class="recent-posts <?php echo esc_attr($classes); ?>" <?php echo $id; ?> data-block-name="<?php echo $acfKey; ?>">
-    <div class="container mx-auto py-12 px-8">
-        <h2 class="font-bold text-center mb-8">Recent Articles</h2>
+    <div class="container mx-auto px-8">
+        <h2 class="font-bold text-center mb-8">
+            <?php if (get_field('headline')) {
+                echo get_field('headline');
+            } else { ?>
+                Recent Articles
+            <?php } ?>
+        </h2>
 
         <?php if ($recent_posts->have_posts()) : ?>
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -92,7 +98,7 @@ $recent_posts = new WP_Query($query_args);
 
                             <!-- Post Title (Hyperlinked) -->
                             <h3 class="mb-8 !text-2xl">
-                                <a href="<?php the_permalink(); ?>" class="hover:text-primary text-secondary"><?php the_title(); ?></a>
+                                <a href="<?php the_permalink(); ?>" class="hover:text-primary text-secondary !no-underline"><?php the_title(); ?></a>
                             </h3>
                         </div>
                     </div>
@@ -103,4 +109,10 @@ $recent_posts = new WP_Query($query_args);
             <p class="text-center text-gray-500">No recent posts available.</p>
         <?php endif; ?>
     </div>
+    <?php $see_more_articles_link = get_field('see_more_articles_link');
+    if ($see_more_articles_link) { ?>
+        <div class="text-center mt-3">
+            <a href="<?php echo $see_more_articles_link['url']; ?>" target="<?php echo $see_more_articles_link['target']; ?>" class="!no-underline arrow-link mx-auto inline-block font-semibold text-secondary hover:!text-primary transition-all duration-300 ease-in-out"><?php echo $see_more_articles_link['title']; ?></a>
+        </div>
+    <?php } ?>
 </section>
