@@ -51,10 +51,10 @@ $bottom_gradient_overlay = get_field('bottom_gradient_overlay');
         <div class="hero-full-width-overlay z-10 opacity-70 absolute h-full w-full" style="background: linear-gradient(to bottom,  <?php echo esc_attr($top_gradient_overlay); ?> 0%,<?php echo esc_attr($bottom_gradient_overlay); ?> 100%);">
         </div>
     <?php } ?>
-    <div class="hero-full-width-content relative px-8 z-20 text-white mx-auto text-center max-w-3xl py-16 lg:pt-[130px] lg:pb-[105px]">
+    <div class="hero-full-width-content relative px-8 z-20 text-white mx-auto text-center container py-16 lg:pt-[130px] lg:pb-[105px]">
 
         <h1 class="text-white"><?php echo esc_html($headline); ?></h1>
-        <p><?php echo wp_kses_post($introduction_text); ?></p>
+        <div class="max-w-3xl mx-auto mb-5"><?php echo $introduction_text; ?></div>
 
         <?php if ($buttons): ?>
             <?php $button_count = count($buttons); ?>
