@@ -46,7 +46,7 @@ $bottom_gradient_overlay = get_field('bottom_gradient_overlay');
 <?php
     }
 } ?>
-<section class="hero-full-width hero-full-width-<?php echo esc_attr($acfKey); ?> bg-primary relative bg-cover w-full h-full <?php echo esc_attr($classes); ?>" <?php echo $id; ?> data-block-name="<?php echo esc_attr($acfKey); ?>">
+<section class="hero-full-width hero-full-width-<?php echo esc_attr($acfKey); ?> relative bg-cover w-full h-full <?php echo esc_attr($classes); ?>" <?php echo $id; ?> data-block-name="<?php echo esc_attr($acfKey); ?>">
     <?php if ($turn_on_overlay) { ?>
         <div class="hero-full-width-overlay z-10 opacity-70 absolute h-full w-full" style="background: linear-gradient(to bottom,  <?php echo esc_attr($top_gradient_overlay); ?> 0%,<?php echo esc_attr($bottom_gradient_overlay); ?> 100%);">
         </div>
@@ -54,7 +54,7 @@ $bottom_gradient_overlay = get_field('bottom_gradient_overlay');
     <div class="hero-full-width-content relative px-8 z-20 text-white mx-auto text-center container py-16 lg:pt-[130px] lg:pb-[105px]">
 
         <h1 class="text-white"><?php echo esc_html($headline); ?></h1>
-        <div class="max-w-3xl mx-auto mb-5"><?php echo $introduction_text; ?></div>
+        <div class="max-w-3xl mx-auto mb-5 text-white"><?php echo $introduction_text; ?></div>
 
         <?php if ($buttons): ?>
             <?php $button_count = count($buttons); ?>

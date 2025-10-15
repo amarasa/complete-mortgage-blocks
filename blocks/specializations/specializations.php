@@ -83,7 +83,7 @@ if (!empty($background_image) && is_array($background_image)) {
                 <div class="container">
                     <div class="flex flex-wrap gap-8 justify-center mb-12 text-center">
                         <?php while (have_rows('specializations')) : the_row(); ?>
-                            <div class="flex justify-center w-full sm:w-[48%] md:w-[30%] lg:w-[23%] gap-2 text-center">
+                            <div class="flex w-full sm:w-[48%] md:w-[30%] lg:w-[23%] gap-2">
                                 <?php $link = get_sub_field('link'); ?>
                                 <?php if ($link) { ?>
                                     <a href="<?php echo $link['url']; ?>" target="<?php echo $link['target']; ?>" class="!no-underline duration-300 transition-opacity ease-in-out hover:opacity-80">
