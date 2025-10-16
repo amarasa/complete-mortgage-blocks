@@ -24,9 +24,9 @@ if (!empty($block['anchor'])) {
         <?php endif; ?>
 
         <?php if (!empty($list)): ?>
-            <div class="md:flex md:flex-wrap md:gap-x-4 justify-center text-center">
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 text-center justify-items-center">
                 <?php foreach ($list as $item): ?>
-                    <div class="mb-4 w-full sm:w-1/3 md:w-1/5 mx-auto">
+                    <div class="mb-4">
                         <?php if ($use_hyperlinks && !empty($item['link_item'])): ?>
                             <a href="<?php echo esc_url($item['link_item']['url']); ?>" target="<?php echo esc_attr($item['link_item']['target'] ?: '_self'); ?>" class="text-secondary !text-2xl font-bold hover:text-primary duration-300 ease-in-out transition-all !no-underline">
                                 <?php echo esc_html($item['link_item']['title']); ?>
