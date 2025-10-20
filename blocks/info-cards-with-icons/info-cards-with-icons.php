@@ -39,7 +39,7 @@ $acfKey = ''; // Set your ACF block name key if needed
                         <?php endif; ?>
 
                         <?php if ($headline) : ?>
-                            <h3 class="mb-4"><?php echo esc_html($headline); ?></h3>
+                            <h3 class="mb-4 text-2xl"><?php echo esc_html($headline); ?></h3>
                         <?php endif; ?>
 
                         <?php if ($description) : ?>

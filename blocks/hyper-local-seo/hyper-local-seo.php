@@ -16,7 +16,6 @@ if (!empty($block['anchor'])) {
     $id = sprintf(' id="%s"', esc_attr($block['anchor']));
 }
 ?>
-
 <section class="hyper-local-seo py-10 <?php echo esc_attr($classes); ?>" <?php echo $id; ?> data-block-name="<?php echo $acfKey; ?>">
     <div class="container px-8">
         <?php if ($headline): ?>
