@@ -71,9 +71,9 @@ if (!empty($background_image) && is_array($background_image)) {
     <?php } ?>
 
     <div class="relative z-30">
-        <div class="text-center px-10">
+        <div class="px-10">
             <?php if ($headline) { ?>
-                <h2 class="text-white"><?php echo $headline; ?></h2>
+                <h2 class="text-white text-center"><?php echo $headline; ?></h2>
             <?php } ?>
             <?php if ($description) { ?>
                 <p class="max-w-[576px] mx-auto text-white mb-12"><?php echo $description; ?></p>
@@ -81,7 +81,7 @@ if (!empty($background_image) && is_array($background_image)) {
             <?php // Check rows exists.
             if (have_rows('specializations')): ?>
                 <div class="container">
-                    <div class="flex flex-wrap gap-8 justify-center mb-12 text-center">
+                    <div class="flex flex-wrap gap-8 mb-12">
                         <?php while (have_rows('specializations')) : the_row(); ?>
                             <div class="flex w-full sm:w-[48%] md:w-[30%] lg:w-[23%] gap-2">
                                 <?php $link = get_sub_field('link'); ?>
