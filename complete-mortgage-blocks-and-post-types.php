@@ -3,7 +3,7 @@
 Plugin Name: Complete Mortgage Blocks and Post Types
 Plugin URI: http://kaleidico.com
 Description: A brief description of the Plugin.
-Version: 2.99.2
+Version: 2.99.3
 Author: Angelo Marasa
 Author URI: http://kaleidico.com
 */
@@ -33,7 +33,7 @@ add_action('admin_enqueue_scripts', 'complete_mortgage_blocks_admin_styles');
 
 function complete_mortgage_blocks_admin_styles($hook)
 {
-    wp_enqueue_style('complete-mortgage-blocks-admin', plugin_dir_url(__FILE__) . 'admin-style.css', [], '2.9');
+    wp_enqueue_style('complete-mortgage-blocks-admin', plugin_dir_url(__FILE__) . 'admin-style.css', [], '2.99.3');
 }
 
 function register_complete_marketing_category($categories)

@@ -74,7 +74,7 @@ if (!empty($foreground_image_set)) {
                         })();
                     </script>
 
-                    <a class="button !text-white !no-underline" onclick="BB.api.openModal('leadWorkflow')" href="javascript:void(0);"><?php echo get_field('banking_bridge_button_text'); ?></a>
+                    <a class="button !text-white !no-underline !block" onclick="BB.api.openModal('leadWorkflow')" href="javascript:void(0);"><?php echo get_field('banking_bridge_button_text'); ?></a>
 
                     <script>
                         function main(purpose) {
