@@ -51,19 +51,54 @@ if (!empty($foreground_image_set)) {
                 <h1><?= esc_html($headline); ?></h1>
                 <p><?= wp_kses_post($introduction_text); ?></p>
 
-                <?php if ($buttons): ?>
-                    <div class="md:flex gap-x-4 flex-wrap">
-                        <?php foreach ($buttons as $button): ?>
-                            <?php if (!empty($button['button'])): ?>
-                                <div class="flex-grow">
-                                    <a class="button mb-3 !no-underline !text-white !w-full text-center" href="<?= esc_url($button['button']['url']); ?>" target="<?= esc_attr($button['button']['target']); ?>">
-                                        <?= esc_html($button['button']['title']); ?>
-                                    </a>
-                                </div>
-                            <?php endif; ?>
-                        <?php endforeach; ?>
-                    </div>
-                <?php endif; ?>
+                <?php $enable_banking_bridge_button = get_field('enable_banking_bridge_button');
+                if ($enable_banking_bridge_button) { ?>
+                    <div id='bb-custom'></div>
+                    <script>
+                        (function() {
+                            function i() {
+                                if (window.BB) BB.init('<?php echo get_field('banking_bridge_id'); ?>', document.getElementById('bb-custom'), {
+                                    type: 'api'
+                                })
+                            }
+                            if (window.BB) i();
+                            else {
+                                var s = document.createElement('script');
+                                s.src = 'https://cdn.bankingbridge.com/assets/external/index.js';
+                                s.type = 'text/javascript';
+                                s.charset = 'utf-8';
+                                s.async = true;
+                                s.onload = i;
+                                document.head.appendChild(s);
+                            }
+                        })();
+                    </script>
+
+                    <a class="button !text-white !no-underline" onclick="BB.api.openModal('leadWorkflow')" href="javascript:void(0);"><?php echo get_field('banking_bridge_button_text'); ?></a>
+
+                    <script>
+                        function main(purpose) {
+                            BB.api.workflowInit({
+                                loan_purpose: purpose
+                            })
+                            BB.api.openModal('leadWorkflow')
+                        }
+                    </script>
+                <?php } else { ?>
+                    <?php if ($buttons): ?>
+                        <div class="md:flex gap-x-4 flex-wrap">
+                            <?php foreach ($buttons as $button): ?>
+                                <?php if (!empty($button['button'])): ?>
+                                    <div class="flex-grow">
+                                        <a class="button mb-3 !no-underline !text-white !w-full text-center" href="<?= esc_url($button['button']['url']); ?>" target="<?= esc_attr($button['button']['target']); ?>">
+                                            <?= esc_html($button['button']['title']); ?>
+                                        </a>
+                                    </div>
+                                <?php endif; ?>
+                            <?php endforeach; ?>
+                        </div>
+                    <?php endif; ?>
+                <?php } ?>
 
                 <p><?= wp_kses_post($below_button_text); ?></p>
             </div>
