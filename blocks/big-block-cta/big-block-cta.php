@@ -1,7 +1,7 @@
 <?php
 $classes = '';
-$id = '';
 $acfKey = 'group_67d2efcf1320e';
+$block_id = 'big-block-cta-' . $block['id'];
 
 // Get ACF fields
 $optional_image = get_field('optional_image');
@@ -16,23 +16,16 @@ if (!empty($block['className'])) {
 }
 
 if (!empty($block['anchor'])) {
-    $id = sprintf(' id="%s"', esc_attr($block['anchor']));
+    $block_id = $block['anchor'];
 }
 ?>
-<?php if ($optional_image): ?>
-    <style>
-        .big-block-cta {
-            background-image: url(<?php echo esc_url($optional_image['url']); ?>);
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-        }
-    </style>
-<?php endif; ?>
-
-<section class="big-block-cta relative <?php echo esc_attr($edge_to_edge ? 'w-full' : 'md:container mx-auto'); ?> <?php echo esc_attr(!$edge_to_edge ? $corners : ''); ?> p-12 bg-primary text-white text-center" <?php echo $id; ?> data-block-name="<?php echo $acfKey; ?>">
+<section id="<?php echo esc_attr($block_id); ?>" class="big-block-cta overflow-hidden relative <?php echo esc_attr($edge_to_edge ? 'w-full' : 'md:container mx-auto'); ?> <?php echo esc_attr(!$edge_to_edge ? $corners : ''); ?> p-12 bg-primary text-white text-center" data-block-name="<?php echo $acfKey; ?>">
     <?php if ($optional_image): ?>
-        <div class="big-block-cta-image-overlay absolute inset-0 bg-black/50"></div>
+        <?php echo wp_get_attachment_image($optional_image['ID'], 'full', false, [
+            'class' => 'absolute inset-0 w-full h-full object-cover ' . esc_attr($corners),
+            'loading' => 'lazy',
+        ]); ?>
+        <div class="big-block-cta-image-overlay absolute inset-0 bg-black/50 <?php echo esc_attr($corners); ?>"></div>
     <?php endif; ?>
     <div class="big-block-cta-content relative z-20">
         <h2 class="font-bold text-white"><?php echo esc_html($headline); ?></h2>
